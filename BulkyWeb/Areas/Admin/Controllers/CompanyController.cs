@@ -1,13 +1,13 @@
-﻿using BulkyBook.DataAccess.Repository.IRepository;
-using BulkyBook.Models;
-using BulkyBook.Models.ViewModels;
-using BulkyBook.Utility;
+﻿using CBP.Models.ViewModels;
+using CBP.DataAccess.Repository.IRepository;
+using CBP.Models;
+using CBP.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 
-namespace BulkyBookWeb.Areas.Admin.Controllers
+namespace CBP.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = SD.Role_Admin)]
@@ -31,13 +31,13 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         public IActionResult Upsert(int? id)
         {
 
-            if(id==null || id == 0)
+            if (id == null || id == 0)
             {
                 return View(new Company());
             }
             else
             {
-                Company companyObj = _unitOfWork.Company.Get(u=>u.Id==id);
+                Company companyObj = _unitOfWork.Company.Get(u => u.Id == id);
                 return View(companyObj);
             }
         }
@@ -73,14 +73,14 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         public IActionResult GetAll()
         {
             List<Company> objCompanyList = _unitOfWork.Company.GetAll().ToList();
-            return Json(new { data =  objCompanyList });
+            return Json(new { data = objCompanyList });
         }
 
         [HttpDelete]
-        public IActionResult Delete(int? id) 
+        public IActionResult Delete(int? id)
         {
-            var CompanyToBeDeleted = _unitOfWork.Company.Get(u =>u.Id == id);
-            if(CompanyToBeDeleted == null)
+            var CompanyToBeDeleted = _unitOfWork.Company.Get(u => u.Id == id);
+            if (CompanyToBeDeleted == null)
             {
                 return Json(new { success = false, message = "Error while deleting" });
             }

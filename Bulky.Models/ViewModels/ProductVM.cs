@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BulkyBook.Models.ViewModels
+namespace CBP.Models.ViewModels
 {
     public class ProductVM
     {
         public Product Product { get; set; }
-        [ValidateNever] 
+        [ValidateNever]
         public IEnumerable<SelectListItem> CategoryList { get; set; }
     }
 }

@@ -24,9 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bulky.DataAccess\BulkyBook.DataAccess.csproj" />
-    <ProjectReference Include="..\Bulky.Models\BulkyBook.Models.csproj" />
-    <ProjectReference Include="..\Bulky.Utility\BulkyBook.Utility.csproj" />
+    <ProjectReference Include="..\Bulky.DataAccess\CBP.DataAccess.csproj" />
+    <ProjectReference Include="..\Bulky.Models\CBP.Models.csproj" />
+    <ProjectReference Include="..\Bulky.Utility\CBP.Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>

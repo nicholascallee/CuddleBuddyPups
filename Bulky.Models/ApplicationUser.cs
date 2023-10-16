@@ -8,17 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BulkyBook.Models
+namespace CBP.Models
 {
-    public class ApplicationUser: IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         [Required]
-        public string Name {  get; set; }
-        
+        public string Name { get; set; }
+
         public string? StreetAddress { get; set; }
-        public String? City { get; set; }
-        public String? State { get; set; }
-        public String? PostalCode { get; set;}
+        public string? City { get; set; }
+        public string? State { get; set; }
+        public string? PostalCode { get; set; }
 
         public int? CompanyId { get; set; }
         [ForeignKey("CompanyId")]
@@ -26,6 +26,6 @@ namespace BulkyBook.Models
         public Company? Company { get; set; }
 
         [NotMapped]
-        public string Role {  get; set; }
+        public string Role { get; set; }
     }
 }

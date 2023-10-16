@@ -1,11 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using BulkyBook.DataAccess.Initializer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
+using CBP.DataAccess.Data;
+using CBP.DataAccess.Initializer;
 
-namespace BulkyBook.DataAccess.Tests
+namespace CBP.DataAccess.Tests
 {
     public class StartupTest
     {

@@ -1,10 +1,12 @@
-﻿using BulkyBook.DataAccess.Repository.IRepository;
-using Moq;
+﻿using Moq;
 using TechTalk.SpecFlow;
 using NUnit.Framework;
 using Microsoft.Extensions.DependencyInjection;
+using CBP.DataAccess.Data;
+using CBP.DataAccess.Repository.IRepository;
+using CBP.Models;
 
-namespace BulkyBook.DataAccess.Tests.Repository
+namespace CBP.DataAccess.Tests.Repository
 {
     [Binding]
     public class GherkinProductRepositoryTests

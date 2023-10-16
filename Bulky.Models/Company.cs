@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-namespace BulkyBook.Models
+namespace CBP.Models
 {
     public class Company
     {
@@ -17,9 +17,9 @@ namespace BulkyBook.Models
         [Required]
         public string Name { get; set; }
         public string? StreetAddress { get; set; }
-        public String? City { get; set; }
-        public String? State { get; set; }
-        public String? PostalCode { get; set; }
-        public String? PhoneNumber { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }
+        public string? PostalCode { get; set; }
+        public string? PhoneNumber { get; set; }
     }
 }

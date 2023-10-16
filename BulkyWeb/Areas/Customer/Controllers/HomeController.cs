@@ -1,13 +1,13 @@
-using BulkyBook.DataAccess.Repository.IRepository;
-using BulkyBook.Models;
-using BulkyBook.Utility;
+using CBP.DataAccess.Repository.IRepository;
+using CBP.Models;
+using CBP.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
 
-namespace BulkyBookWeb.Areas.Customer.Controllers
+namespace CBP.Web.Areas.Customer.Controllers
 {
     [Area("Customer")]
     public class HomeController : Controller
@@ -27,11 +27,12 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
             IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category,ProductImages");
             return View(productList);
         }
-        
+
         public IActionResult Details(int productId)
         {
-            ShoppingCart cart = new() { 
-                Product = _unitOfWork.Product.Get(u => u.Id ==  productId, includeProperties: "Category,ProductImages"),
+            ShoppingCart cart = new()
+            {
+                Product = _unitOfWork.Product.Get(u => u.Id == productId, includeProperties: "Category,ProductImages"),
                 Count = 1,
                 ProductId = productId
             };
@@ -46,10 +47,10 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
             shoppingCart.ApplicationUserId = userId;
 
-            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u=>u.ApplicationUserId ==userId && u.ProductId == shoppingCart.ProductId);
-            
+            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ApplicationUserId == userId && u.ProductId == shoppingCart.ProductId);
 
-            if(cartFromDb != null)
+
+            if (cartFromDb != null)
             {
                 cartFromDb.Count += shoppingCart.Count;
                 _unitOfWork.ShoppingCart.Update(cartFromDb);
@@ -64,7 +65,7 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
             TempData["success"] = "Cart Updated Successfully";
 
 
-            
+
             return RedirectToAction(nameof(Index));
         }
 

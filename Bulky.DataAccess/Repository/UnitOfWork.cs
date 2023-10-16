@@ -1,12 +1,7 @@
-﻿using BulkyBook.DataAccess.Data;
-using BulkyBook.DataAccess.Repository.IRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CBP.DataAccess.Data;
+using CBP.DataAccess.Repository.IRepository;
 
-namespace BulkyBook.DataAccess.Repository
+namespace CBP.DataAccess.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {

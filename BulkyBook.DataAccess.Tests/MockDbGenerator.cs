@@ -1,8 +1,8 @@
-﻿using BulkyBook.DataAccess.Data;
+﻿using CBP.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace BulkyBook.DataAccess.Tests
+namespace CBP.DataAccess.Tests
 {
     public static class MockDbGenerator
     {

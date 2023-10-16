@@ -1,7 +1,9 @@
-﻿using BulkyBook.Models;
+﻿using CBP.DataAccess.Data;
+using CBP.DataAccess.Tests;
+using CBP.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BulkyBook.DataAccess.Tests.Data
+namespace CBP.DataAccess.Tests.Data
 {
     [TestFixture]
     public class ApplicationDbContextTests

@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BulkyBook.Utility
+namespace CBP.Utility
 {
-    public class EmailSender : IEmailSender {
-        public Task SendEmailAsync(string email, string subject, string htmlMessage) {
+    public class EmailSender : IEmailSender
+    {
+        public Task SendEmailAsync(string email, string subject, string htmlMessage)
+        {
             //logic to send email
             return Task.CompletedTask;
         }

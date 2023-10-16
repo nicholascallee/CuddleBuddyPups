@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BulkyBook.DataAccess.Data;
-using BulkyBook.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using CBP.DataAccess.Data;
+using CBP.DataAccess.Repository.IRepository;
 
-namespace BulkyBook.DataAccess.Repository
+namespace CBP.DataAccess.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
@@ -18,8 +18,8 @@ namespace BulkyBook.DataAccess.Repository
         public Repository(ApplicationDbContext db)
         {
             _db = db;
-            this.dbSet = _db.Set<T>();
-            _db.Products.Include(u => u.Category).Include(u =>u.CategoryId);
+            dbSet = _db.Set<T>();
+            _db.Products.Include(u => u.Category).Include(u => u.CategoryId);
         }
         public void Add(T entity)
         {
@@ -54,15 +54,15 @@ namespace BulkyBook.DataAccess.Repository
         public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
-            if(filter != null)
+            if (filter != null)
             {
                 query = query.Where(filter);
             }
-            if(!string.IsNullOrEmpty(includeProperties))
+            if (!string.IsNullOrEmpty(includeProperties))
             {
-                foreach(var includeProp in includeProperties
-                    .Split(new char[] { ',' },StringSplitOptions.RemoveEmptyEntries))
-                { 
+                foreach (var includeProp in includeProperties
+                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
                     query = query.Include(includeProp);
                 }
             }

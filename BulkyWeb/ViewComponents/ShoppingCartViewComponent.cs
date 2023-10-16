@@ -1,14 +1,14 @@
-﻿using BulkyBook.DataAccess.Repository.IRepository;
-using BulkyBook.Utility;
+﻿using CBP.DataAccess.Repository.IRepository;
+using CBP.Utility;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace BulkyBookWeb.ViewComponents
+namespace CBP.Web.ViewComponents
 {
     public class ShoppingCartViewComponent : ViewComponent
     {
         private readonly IUnitOfWork _unitOfWork;
-        public ShoppingCartViewComponent( IUnitOfWork unitOfWork)
+        public ShoppingCartViewComponent(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -21,7 +21,7 @@ namespace BulkyBookWeb.ViewComponents
 
             if (claim != null)
             {
-                if(HttpContext.Session.GetInt32(SD.SessionCart) == null)
+                if (HttpContext.Session.GetInt32(SD.SessionCart) == null)
                 {
                     HttpContext.Session.SetInt32(SD.SessionCart,
                     _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == claim.Value).Count());

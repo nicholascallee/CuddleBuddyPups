@@ -1,11 +1,11 @@
-﻿using BulkyBook.DataAccess.Data;
-using BulkyBook.Models;
-using BulkyBook.Utility;
+﻿using CBP.DataAccess.Data;
+using CBP.Models;
+using CBP.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace BulkyBook.DataAccess.Initializer
+namespace CBP.DataAccess.Initializer
 {
     public class DBInitializer : IDBInitializer
     {
@@ -16,20 +16,20 @@ namespace BulkyBook.DataAccess.Initializer
         public DBInitializer(
             UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager,
-            ApplicationDbContext db) 
+            ApplicationDbContext db)
         {
             _roleManager = roleManager;
             _userManager = userManager;
             _db = db;
-        
+
         }
-        
-        
+
+
         public void Initialize()
         {
             try
             {
-                if(_db.Database.GetPendingMigrations().Count() > 0)
+                if (_db.Database.GetPendingMigrations().Count() > 0)
                 {
                     _db.Database.Migrate();
                 }
@@ -42,7 +42,7 @@ namespace BulkyBook.DataAccess.Initializer
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Employee)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Company)).GetAwaiter().GetResult();
-       
+
 
                 _userManager.CreateAsync(new ApplicationUser
                 {
@@ -55,10 +55,10 @@ namespace BulkyBook.DataAccess.Initializer
                     PostalCode = "64119",
                     City = "Maryville",
 
-                }, 
+                },
                 "REMOVED").GetAwaiter().GetResult();
 
-                
+
                 ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "nicholascallee@gmail.com");
                 _userManager.AddToRoleAsync(user, SD.Role_Admin).GetAwaiter().GetResult();
             }

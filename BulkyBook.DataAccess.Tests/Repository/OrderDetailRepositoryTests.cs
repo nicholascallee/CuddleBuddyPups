@@ -1,10 +1,11 @@
-﻿using BulkyBook.DataAccess.Repository;
-using BulkyBook.DataAccess.Repository.IRepository;
+﻿using CBP.DataAccess.Repository;
+using CBP.DataAccess.Data;
+using CBP.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
-namespace BulkyBook.DataAccess.Tests.Repository
+namespace CBP.DataAccess.Tests.Repository
 {
     [TestFixture]
     public class OrderDetailRepositoryTests

@@ -1,3 +1,3 @@
 global using NUnit.Framework;
-global using BulkyBook.DataAccess.Data;
-global using BulkyBook.Models;
+global using CBP.DataAccess.Data;
+global using CBP.Models;

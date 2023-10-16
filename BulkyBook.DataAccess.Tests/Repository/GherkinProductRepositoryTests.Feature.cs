@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace BulkyBook.DataAccess.Tests.Repository
+namespace CBP.DataAccess.Tests.Repository
 {
     using TechTalk.SpecFlow;
     using System;

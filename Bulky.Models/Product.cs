@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-namespace BulkyBook.Models
+namespace CBP.Models
 {
     public class Product
     {
@@ -29,7 +29,7 @@ namespace BulkyBook.Models
         public double ListPrice { get; set; }
         [Required]
         [Display(Name = "List Price for 1-50")]
-        [Range(1,1000)]
+        [Range(1, 1000)]
         public double Price { get; set; }
         [Required]
         [Display(Name = "List Price for 50-99")]

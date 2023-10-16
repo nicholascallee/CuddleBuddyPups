@@ -1,10 +1,12 @@
-﻿using BulkyBook.DataAccess.Initializer;
-using BulkyBook.Utility;
+﻿using CBP.DataAccess.Data;
+using CBP.DataAccess.Initializer;
+using CBP.Models;
+using CBP.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 
-namespace BulkyBook.DataAccess.Tests.Initializer
+namespace CBP.DataAccess.Tests.Initializer
 {
     [TestFixture]
     public class DbInitializerTests

@@ -1,8 +1,4 @@
-﻿using BulkyBook.DataAccess.Repository.IRepository;
-using BulkyBook.Models;
-using BulkyBook.Models.ViewModels;
-using BulkyBook.Utility;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -11,8 +7,12 @@ using System.Threading;
 using System.Security.Claims;
 using Stripe;
 using Stripe.Checkout;
+using CBP.DataAccess.Repository.IRepository;
+using CBP.Models;
+using CBP.Models.ViewModels;
+using CBP.Utility;
 
-namespace BulkyBookWeb.Areas.Admin.Controllers
+namespace CBP.Web.Areas.Admin.Controllers
 {
     [Area("admin")]
     [Authorize]
@@ -68,7 +68,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             _unitOfWork.Save();
             TempData["Success"] = "Order Details Updated Successfully.";
             return RedirectToAction(nameof(Details), new { orderId = orderHeaderFromDb.Id });
-         }
+        }
 
 
 
@@ -92,7 +92,8 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             orderHeader.Carrier = OrderVM.OrderHeader.Carrier;
             orderHeader.OrderStatus = SD.StatusShipped;
             orderHeader.ShippingDate = DateTime.Now;
-            if (orderHeader.PaymentStatus == SD.PaymentStatusDelayedPayment) {
+            if (orderHeader.PaymentStatus == SD.PaymentStatusDelayedPayment)
+            {
                 orderHeader.PaymentDueDate = DateTime.Now.AddDays(30);
             }
 
@@ -211,7 +212,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         {
             IEnumerable<OrderHeader> objOrderHeaders = _unitOfWork.OrderHeader.GetAll(includeProperties: "ApplicationUser").ToList();
 
-            if(User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee))
+            if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee))
             {
                 objOrderHeaders = _unitOfWork.OrderHeader.GetAll(includeProperties: "ApplicationUser").ToList();
             }
@@ -231,10 +232,10 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                     objOrderHeaders = objOrderHeaders.Where(u => u.OrderStatus == SD.StatusInProcess);
                     break;
                 case "completed":
-                    objOrderHeaders = objOrderHeaders.Where(u => u.OrderStatus == SD.StatusShipped); 
+                    objOrderHeaders = objOrderHeaders.Where(u => u.OrderStatus == SD.StatusShipped);
                     break;
                 case "approved":
-                    objOrderHeaders = objOrderHeaders.Where(u => u.OrderStatus == SD.StatusApproved); 
+                    objOrderHeaders = objOrderHeaders.Where(u => u.OrderStatus == SD.StatusApproved);
                     break;
                 default:
                     break;
@@ -246,7 +247,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             return Json(new { data = objOrderHeaders });
         }
 
-        
+
 
 
         #endregion

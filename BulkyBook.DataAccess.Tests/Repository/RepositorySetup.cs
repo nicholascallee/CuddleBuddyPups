@@ -1,5 +1,7 @@
-﻿using BulkyBook.DataAccess.Repository;
-using BulkyBook.DataAccess.Repository.IRepository;
+﻿using CBP.DataAccess.Data;
+using CBP.DataAccess.Repository;
+using CBP.DataAccess.Repository.IRepository;
+using CBP.Models;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -7,12 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BulkyBook.DataAccess.Tests.Repository
+namespace CBP.DataAccess.Tests.Repository
 {
     public class RepositorySetup
     {
 
-        public RepositorySetup() { 
+        public RepositorySetup()
+        {
             var testUnitOfWork = SetupUnitOfWork();
             pocExample(testUnitOfWork.Object);
         }

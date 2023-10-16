@@ -1,18 +1,17 @@
-﻿using BulkyBook.DataAccess.Repository;
-using BulkyBook.DataAccess.Repository.IRepository;
-using BulkyBook.Models;
+﻿using CBP.DataAccess.Repository;
+using CBP.Models;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 
-namespace BulkyBook.DataAccess.Tests.Repository
+namespace CBP.DataAccess.Tests.Repository
 {
     using Microsoft.Extensions.DependencyInjection;
     using NUnit.Framework;
     using Microsoft.EntityFrameworkCore;
-    using BulkyBook.DataAccess.Repository.IRepository;
-    using BulkyBook.DataAccess.Repository;
-    using BulkyBook.DataAccess.Data;
+    using CBP.DataAccess.Repository;
     using Microsoft.AspNetCore.Hosting;
+    using CBP.DataAccess.Data;
+    using CBP.DataAccess.Repository.IRepository;
 
     [TestFixture]
     public class ProductRepositoryTests

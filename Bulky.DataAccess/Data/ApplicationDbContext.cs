@@ -1,9 +1,9 @@
-﻿using BulkyBook.Models;
+﻿using CBP.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace BulkyBook.DataAccess.Data
+namespace CBP.DataAccess.Data
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
@@ -33,7 +33,7 @@ namespace BulkyBook.DataAccess.Data
                 new Category { Id = 3, Name = "Comedy", DisplayOrder = 3 },
                 new Category { Id = 4, Name = "History", DisplayOrder = 4 }
                 );
-            
+
             modelBuilder.Entity<Company>().HasData(
 
 
@@ -56,7 +56,7 @@ namespace BulkyBook.DataAccess.Data
                     City = "Vid City",
                     PostalCode = "66666",
                     State = "IL",
-                    PhoneNumber = "7779990000" 
+                    PhoneNumber = "7779990000"
                 },
 
                 new Company
@@ -84,7 +84,7 @@ namespace BulkyBook.DataAccess.Data
                     Price50 = 85,
                     Price100 = 80,
                     CategoryId = 1
-                    
+
                 },
                 new Product
                 {
@@ -98,7 +98,7 @@ namespace BulkyBook.DataAccess.Data
                     Price50 = 25,
                     Price100 = 20,
                     CategoryId = 2
-                    
+
                 },
                 new Product
                 {
@@ -112,7 +112,7 @@ namespace BulkyBook.DataAccess.Data
                     Price50 = 40,
                     Price100 = 35,
                     CategoryId = 3
-                    
+
                 },
                 new Product
                 {
@@ -126,7 +126,7 @@ namespace BulkyBook.DataAccess.Data
                     Price50 = 60,
                     Price100 = 55,
                     CategoryId = 2
-                    
+
                 },
                 new Product
                 {
@@ -140,7 +140,7 @@ namespace BulkyBook.DataAccess.Data
                     Price50 = 25,
                     Price100 = 20,
                     CategoryId = 3
-                    
+
                 },
                 new Product
                 {
@@ -154,7 +154,7 @@ namespace BulkyBook.DataAccess.Data
                     Price50 = 22,
                     Price100 = 20,
                     CategoryId = 2
-                    
+
                 }
 
                 );

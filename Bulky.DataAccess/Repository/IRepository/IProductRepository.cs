@@ -1,6 +1,6 @@
-﻿using BulkyBook.Models;
+﻿using CBP.Models;
 
-namespace BulkyBook.DataAccess.Repository.IRepository
+namespace CBP.DataAccess.Repository.IRepository
 {
     public interface IProductRepository : IRepository<Product>
     {

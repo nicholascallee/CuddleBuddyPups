@@ -1,8 +1,5 @@
-﻿using BulkyBook.DataAccess.Repository.IRepository;
-using BulkyBook.DataAccess.Data;
-using BulkyBook.Models;
-using BulkyBook.Models.ViewModels;
-using BulkyBook.Utility;
+﻿using CBP.DataAccess.Data;
+using CBP.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,8 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Data;
+using CBP.DataAccess.Repository.IRepository;
+using CBP.Models;
+using CBP.Models.ViewModels;
+using CBP.Utility;
 
-namespace BulkyBookWeb.Areas.Admin.Controllers
+namespace CBP.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = SD.Role_Admin)]

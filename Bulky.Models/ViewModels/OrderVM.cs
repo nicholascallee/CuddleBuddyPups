@@ -1,10 +1,11 @@
-﻿using System;
+﻿using CBP.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BulkyBook.Models.ViewModels
+namespace CBP.Models.ViewModels
 {
     public class OrderVM
     {
