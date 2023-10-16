@@ -80,7 +80,7 @@
 ### 4. Gallery:
 * **Content**: Photos of the puppies, parents, and any past litters. This gives potential buyers a visual idea of what to
 
-## 5. About Us:
+### 5. About Us:
 * **Content**: Information about your breeding practices, your location, and your mission or philosophy.
   * Why we do what we do and why we love what we do.
   * Emphasis on an at home family style breeder
@@ -88,10 +88,10 @@
   * Share stories or backgrounds of how you got into breeding, to create a personal connection with potential buyers.
 * **Extra Tip**: Share stories or backgrounds of how you got into breeding, to create a personal connection with potential buyers.
 
-## 6. Contact Page:
+### 6. Contact Page:
 * **Content**: Provide multiple ways for potential buyers to reach out, including phone numbers, email addresses. Here is where we will add the form to request more information and show interest.
 
-## 7. Policies and Guarantees:
+### 7. Policies and Guarantees:
 * **Content**: Detail any guarantees you offer, return policies, or health checks for the puppies. Provide a puppy sales contract and provide explanation for what each section means.
 
 
