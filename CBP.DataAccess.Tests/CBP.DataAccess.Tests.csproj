@@ -27,7 +27,7 @@
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="4.0.31-beta" />
   </ItemGroup>
   <ItemGroup>
-	<ProjectReference Include="..\Bulky.DataAccess\CBP.DataAccess.csproj" />
+	<ProjectReference Include="..\CBP.DataAccess\CBP.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

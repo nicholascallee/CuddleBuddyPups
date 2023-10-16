@@ -22,7 +22,7 @@ namespace CBP.DataAccess.Tests.Repository
 
             // Create mock of IWebHostEnvironment
             var mockEnvironment = new Mock<IWebHostEnvironment>();
-            mockEnvironment.Setup(m => m.ContentRootPath).Returns("C:\\Development\\visualStudioProjects\\Bulky\\BulkyWeb");
+            mockEnvironment.Setup(m => m.ContentRootPath).Returns("C:\\Development\\visualStudioProjects\\Bulky\\CBP.Web");
 
             // Create startup instance
             var startup = new StartupTest(mockEnvironment.Object);
