@@ -1,4 +1,4 @@
-namespace CBP.Models
+namespace CBP.Models.ViewModels
 {
     public class ErrorViewModel
     {

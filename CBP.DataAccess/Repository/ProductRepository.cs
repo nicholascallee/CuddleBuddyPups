@@ -29,7 +29,6 @@ namespace CBP.DataAccess.Repository
                 objFromDb.ListPrice = obj.ListPrice;
                 objFromDb.Price50 = obj.Price50;
                 objFromDb.Price100 = obj.Price100;
-                objFromDb.CategoryId = obj.CategoryId;
                 objFromDb.Author = obj.Author;
                 objFromDb.ProductImages = obj.ProductImages;
                 //if(obj.ImageUrl != null)

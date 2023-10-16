@@ -12,14 +12,12 @@ namespace CBP.DataAccess.Data
 
         }
 
-        public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<OrderHeader> OrderHeaders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
-        public DbSet<Company> Companies { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,49 +25,9 @@ namespace CBP.DataAccess.Data
 
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Category>().HasData(
-                new Category { Id = 1, Name = "Action", DisplayOrder = 1 },
-                new Category { Id = 2, Name = "Sci-Fi", DisplayOrder = 2 },
-                new Category { Id = 3, Name = "Comedy", DisplayOrder = 3 },
-                new Category { Id = 4, Name = "History", DisplayOrder = 4 }
-                );
-
-            modelBuilder.Entity<Company>().HasData(
 
 
-                new Company
-                {
-                    Id = 1,
-                    Name = "Tech Solution",
-                    StreetAddress = "123 Tech St",
-                    City = "Tech City",
-                    PostalCode = "12121",
-                    State = "IL",
-                    PhoneNumber = "6669990000"
-                },
-
-                new Company
-                {
-                    Id = 2,
-                    Name = "Vivid Books",
-                    StreetAddress = "999 Vid St",
-                    City = "Vid City",
-                    PostalCode = "66666",
-                    State = "IL",
-                    PhoneNumber = "7779990000"
-                },
-
-                new Company
-                {
-                    Id = 3,
-                    Name = "Readers Club",
-                    StreetAddress = "999 Main St",
-                    City = "Lala land",
-                    PostalCode = "99999",
-                    State = "NY",
-                    PhoneNumber = "1113335555"
-                }
-                );
+           
 
             modelBuilder.Entity<Product>().HasData(
                 new Product
@@ -82,8 +40,7 @@ namespace CBP.DataAccess.Data
                     ListPrice = 99,
                     Price = 90,
                     Price50 = 85,
-                    Price100 = 80,
-                    CategoryId = 1
+                    Price100 = 80
 
                 },
                 new Product
@@ -96,8 +53,7 @@ namespace CBP.DataAccess.Data
                     ListPrice = 40,
                     Price = 30,
                     Price50 = 25,
-                    Price100 = 20,
-                    CategoryId = 2
+                    Price100 = 20
 
                 },
                 new Product
@@ -110,9 +66,7 @@ namespace CBP.DataAccess.Data
                     ListPrice = 55,
                     Price = 50,
                     Price50 = 40,
-                    Price100 = 35,
-                    CategoryId = 3
-
+                    Price100 = 35
                 },
                 new Product
                 {
@@ -124,8 +78,7 @@ namespace CBP.DataAccess.Data
                     ListPrice = 70,
                     Price = 65,
                     Price50 = 60,
-                    Price100 = 55,
-                    CategoryId = 2
+                    Price100 = 55
 
                 },
                 new Product
@@ -138,8 +91,7 @@ namespace CBP.DataAccess.Data
                     ListPrice = 30,
                     Price = 27,
                     Price50 = 25,
-                    Price100 = 20,
-                    CategoryId = 3
+                    Price100 = 20
 
                 },
                 new Product
@@ -152,8 +104,7 @@ namespace CBP.DataAccess.Data
                     ListPrice = 25,
                     Price = 23,
                     Price50 = 22,
-                    Price100 = 20,
-                    CategoryId = 2
+                    Price100 = 20
 
                 }
 
