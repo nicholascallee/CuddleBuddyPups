@@ -1,75 +1,57 @@
-﻿@model ProductVM
+﻿@model Product
 
 <div class="card shadow border-0 my-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">@(Model.Product.Id!=0?"Update":"Create") Product</h2>
+                <h2 class="text-white py-2">@(Model.Id!=0?"Update":"Create") Product</h2>
             </div>
         </div>
     </div>
     <div class="card-body p-4">
         <form method="post" class="row" enctype="multipart/form-data">
-            <input asp-for="Product.Id" hidden />
+            <input asp-for="@(Model.Id)" hidden />
 
             <div class="row">
                 <div class="col-10">
                     <div class="border p-3">
 
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Product.Title" class="form-control border-0 shadow" />
-                            <label asp-for="Product.Title" class="ms-2"></label>
-                            <span asp-validation-for="Product.Title" class="text-danger"></span>
+                            <input asp-for="@(Model.Title)" class="form-control border-0 shadow" />
+                            <label asp-for="@(Model.Title)" class="ms-2"></label>
+                            <span asp-validation-for="@(Model.Title)" class="text-danger"></span>
                         </div>
                         <div class="py-2 col-12">
-                            <label asp-for="Product.Description" class="ms-2 text-muted"></label>
-                            <textarea asp-for="Product.Description" class="form-control border-0 shadow"></textarea>
+                            <label asp-for="@(Model.Description)" class="ms-2 text-muted"></label>
+                            <textarea asp-for="@(Model.Description)" class="form-control border-0 shadow"></textarea>
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Product.ISBN" class="form-control border-0 shadow" />
-                            <label asp-for="Product.ISBN" class="ms-2"></label>
-                            <span asp-validation-for="Product.ISBN" class="text-danger"></span>
+                            <input asp-for="@(Model.ISBN)" class="form-control border-0 shadow" />
+                            <label asp-for="@(Model.ISBN)" class="ms-2"></label>
+                            <span asp-validation-for="@(Model.ISBN)" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Product.Author" class="form-control border-0 shadow" />
-                            <label asp-for="Product.Author" class="ms-2"></label>
-                            <span asp-validation-for="Product.Author" class="text-danger"></span>
+                            <input asp-for="@(Model.Author)" class="form-control border-0 shadow" />
+                            <label asp-for="@(Model.Author)" class="ms-2"></label>
+                            <span asp-validation-for="@(Model.Author)" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Product.ListPrice" class="form-control border-0 shadow" />
-                            <label asp-for="Product.ListPrice" class="ms-2"></label>
-                            <span asp-validation-for="Product.ListPrice" class="text-danger"></span>
+                            <input asp-for="@(Model.ListPrice)" class="form-control border-0 shadow" />
+                            <label asp-for="@(Model.ListPrice)" class="ms-2"></label>
+                            <span asp-validation-for="@(Model.ListPrice)" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Product.Price" class="form-control border-0 shadow" />
-                            <label asp-for="Product.Price" class="ms-2"></label>
-                            <span asp-validation-for="Product.Price" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="Product.Price50" class="form-control border-0 shadow" />
-                            <label asp-for="Product.Price50" class="ms-2"></label>
-                            <span asp-validation-for="Product.Price50" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="Product.Price100" class="form-control border-0 shadow" />
-                            <label asp-for="Product.Price100" class="ms-2"></label>
-                            <span asp-validation-for="Product.Price100" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-12">
-                            <select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" class="form-select border-0 shadow">
-                                <option disabled selected>--Select Category--</option>
-
-                            </select>
-                            <label asp-for="Product.CategoryId" class="ms-2"></label>
-                            <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                            <input asp-for="@(Model.Price)" class="form-control border-0 shadow" />
+                            <label asp-for="@(Model.Price)" class="ms-2"></label>
+                            <span asp-validation-for="@(Model.Price)" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
                             <input type="file" name="files" class="form-control border-0 shadow" multiple />
-                            <label asp-for="Product.ProductImages" class="ms-2"></label>
+                            <label asp-for="@(Model.ProductImages)" class="ms-2"></label>
                         </div>
                         <div class="row pt-2">
                             <div class="col-6 col-md-3">
-                                @if (Model.Product.Id != 0)
+                                @if (Model.Id != 0)
                                 {
                                     <button type="submit" class="btn btn-primary form-control">Update</button>
                                 }
@@ -87,9 +69,9 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    @if (Model.Product.ProductImages != null)
+                    @if (Model.ProductImages != null)
                     {
-                        foreach(var image in Model.Product.ProductImages)
+                        foreach(var image in Model.ProductImages)
                         {
                             <div class="border p-1 m-2 text-center">
                                 <img src="@image.ImageUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />

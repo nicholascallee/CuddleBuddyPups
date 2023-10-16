@@ -122,9 +122,6 @@ namespace CBP.Web.Areas.Identity.Pages.Account
             public string State { get; set; }
             public string PostalCode { get; set; }
             public string PhoneNumber { get; set; }
-            public int? CompanyId { get; set; }
-            [ValidateNever]
-            public IEnumerable<SelectListItem> CompanyList { get; set; }
 
 
 
@@ -142,11 +139,6 @@ namespace CBP.Web.Areas.Identity.Pages.Account
                 {
                     Text = i,
                     Value = i
-                }),
-                CompanyList = _unitOfWork.Company.GetAll().Select(i => new SelectListItem
-                {
-                    Text = i.Name,
-                    Value = i.Id.ToString()
                 })
             };
 
@@ -172,10 +164,6 @@ namespace CBP.Web.Areas.Identity.Pages.Account
                 user.PhoneNumber = Input.PhoneNumber;
                 user.State = Input.State;
 
-                if (Input.Role == SD.Role_Company)
-                {
-                    user.CompanyId = Input.CompanyId;
-                }
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 

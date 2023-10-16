@@ -42,12 +42,7 @@ namespace CBP.Web.Areas.Admin.Controllers
                 {
                     Text = i.Name,
                     Value = i.Name
-                }),
-                CompanyList = _unitOfWork.Company.GetAll().Select(i => new SelectListItem
-                {
-                    Text = i.Name,
-                    Value = i.Id.ToString()
-                }),
+                })
             };
 
             RoleVM.ApplicationUser.Role = _userManager.GetRolesAsync(_unitOfWork.ApplicationUser.Get(u => u.Id == userId))
@@ -65,33 +60,14 @@ namespace CBP.Web.Areas.Admin.Controllers
             ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == roleManagmentVM.ApplicationUser.Id);
 
 
-            if (!(roleManagmentVM.ApplicationUser.Role == oldRole))
-            {
-                //a role was updated
-                if (roleManagmentVM.ApplicationUser.Role == SD.Role_Company)
-                {
-                    applicationUser.CompanyId = roleManagmentVM.ApplicationUser.CompanyId;
-                }
-                if (oldRole == SD.Role_Company)
-                {
-                    applicationUser.CompanyId = null;
-                }
-                _unitOfWork.ApplicationUser.Update(applicationUser);
-                _unitOfWork.Save();
+            
+            _unitOfWork.ApplicationUser.Update(applicationUser);
+            _unitOfWork.Save();
 
-                _userManager.RemoveFromRoleAsync(applicationUser, oldRole).GetAwaiter().GetResult();
-                _userManager.AddToRoleAsync(applicationUser, roleManagmentVM.ApplicationUser.Role).GetAwaiter().GetResult();
+            _userManager.RemoveFromRoleAsync(applicationUser, oldRole).GetAwaiter().GetResult();
+            _userManager.AddToRoleAsync(applicationUser, roleManagmentVM.ApplicationUser.Role).GetAwaiter().GetResult();
 
-            }
-            else
-            {
-                if (oldRole == SD.Role_Company && applicationUser.CompanyId != roleManagmentVM.ApplicationUser.CompanyId)
-                {
-                    applicationUser.CompanyId = roleManagmentVM.ApplicationUser.CompanyId;
-                    _unitOfWork.ApplicationUser.Update(applicationUser);
-                    _unitOfWork.Save();
-                }
-            }
+           
 
             return RedirectToAction("Index");
         }
@@ -109,13 +85,6 @@ namespace CBP.Web.Areas.Admin.Controllers
 
                 user.Role = _userManager.GetRolesAsync(user).GetAwaiter().GetResult().FirstOrDefault();
 
-                if (user.Company == null)
-                {
-                    user.Company = new Company()
-                    {
-                        Name = ""
-                    };
-                }
             }
 
             return Json(new { data = objUserList });

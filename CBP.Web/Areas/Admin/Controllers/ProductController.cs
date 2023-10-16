@@ -31,39 +31,31 @@ namespace CBP.Web.Areas.Admin.Controllers
 
         public IActionResult Upsert(int? id)
         {
-            ProductVM productVM = new()
-            {
-                CategoryList = _unitOfWork.Category
-                .GetAll().Select(u => new SelectListItem
-                {
-                    Text = u.Name,
-                    Value = u.Id.ToString()
-                }),
-                Product = new Product()
-            };
+            Product product = new Product();
+
             if (id == null || id == 0)
             {
-                return View(productVM);
+                return View(product);
             }
             else
             {
-                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id, includeProperties: "ProductImages");
-                return View(productVM);
+                product = _unitOfWork.Product.Get(u => u.Id == id, includeProperties: "ProductImages");
+                return View(product);
             }
         }
 
         [HttpPost]
-        public IActionResult Upsert(ProductVM productVM, List<IFormFile> files)
+        public IActionResult Upsert(Product product, List<IFormFile> files)
         {
             if (ModelState.IsValid)
             {
-                if (productVM.Product.Id == 0)
+                if (product.Id == 0)
                 {
-                    _unitOfWork.Product.Add(productVM.Product);
+                    _unitOfWork.Product.Add(product);
                 }
                 else
                 {
-                    _unitOfWork.Product.Update(productVM.Product);
+                    _unitOfWork.Product.Update(product);
                 }
 
 
@@ -73,15 +65,15 @@ namespace CBP.Web.Areas.Admin.Controllers
                 if (files != null)
                 {
                     //if the current product does not contain a list of product images then make one
-                    if (productVM.Product.ProductImages == null)
+                    if (product.ProductImages == null)
                     {
-                        productVM.Product.ProductImages = new List<ProductImage>();
+                        product.ProductImages = new List<ProductImage>();
                     }
 
                     foreach (IFormFile file in files)
                     {
                         string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                        string productPath = @"images\products\product-" + productVM.Product.Id + @"\";
+                        string productPath = @"images\products\product-" + product.Id + @"\";
                         string finalPath = Path.Combine(wwwRootPath, productPath);
 
                         //create folder for product
@@ -99,15 +91,15 @@ namespace CBP.Web.Areas.Admin.Controllers
                         ProductImage productImage = new()
                         {
                             ImageUrl = @"\" + productPath + fileName,
-                            ProductId = productVM.Product.Id,
+                            ProductId = product.Id,
                         };
 
 
                         //add the product image to the list of images in the view model
-                        productVM.Product.ProductImages.Add(productImage);
+                        product.ProductImages.Add(productImage);
 
                     }
-                    _unitOfWork.Product.Update(productVM.Product);
+                    _unitOfWork.Product.Update(product);
                     _unitOfWork.Save();
                 }
 
@@ -117,13 +109,7 @@ namespace CBP.Web.Areas.Admin.Controllers
             }
             else
             {
-                productVM.CategoryList = _unitOfWork.Category
-                .GetAll().Select(u => new SelectListItem
-                {
-                    Text = u.Name,
-                    Value = u.Id.ToString()
-                });
-                return View(productVM);
+                return View(product);
             }
         }
 
