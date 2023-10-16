@@ -1,7 +1,10 @@
-https://www.udemy.com/course/complete-aspnet-core-21-course/
+# Cuddle Buddy Pups
+## A website by Nick Allee
 
-Original: https://github.com/bhrugen/Bulky_MVC/tree/master
+## Current Setup:
+-  this project currently contains a finished book sales website. I am going to rework it for a dog sales website that takes inquiries only. No sales on this site.
 
-My Live Version: https://alleebulkybooks.azurewebsites.net/
-
-![image](https://github.com/nicholascallee/DotNetTutorial/assets/141438641/7eec2018-6a03-4bff-9ffd-3b0b8c274b41)
+### Plan of Action:
+-  Start with laying out the pages that need added and removed. Scaffold those pages and ensure travel between them works correctly.
+-  Determine if we want the user to be able to log in. what features would we offer that require that? checking the application status of an adoption?? maybe?
+-  Work through each page and add detail as needed.
