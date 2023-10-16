@@ -1,13 +1,23 @@
 # Cuddle Buddy Pups
 ## A website by Nick Allee
 
-## Current Setup:
+## Current Setup and Plan of Action:
 -  this project currently contains a finished book sales website. I am going to rework it for a dog sales website that takes inquiries only. No sales on this site.
-
+-  Determine the data model and adjust the repo and model sections accordingly
+-  Determine which controllers need kept and which need added.
+-  Lay out the ui pages that need added and removed. Scaffold those pages and ensure travel between them works correctly.
+-  Insert the created content below into their respective pages.
+-  Modify the new controllers to effectivly manage the newly modeled data in the way the business requests
+-  Setup the new pages with functionality from the newly created controllers to enable the user to fufil the business requirements.
+-  Work through each page and add detail as needed.
 
 ### Business Requirements
--  The user can log in to submit and check the status of an adoption application.
--  The user can also submit an inquiry for more information before fully applying for an adoption.
+-  The user can freely view the home page, breed information page, about page, contact page, policies and contract page.
+-  The user can log in
+-  the logged in user can submit the an adoption application.
+-  The logged in user can submit an inquiry for more information before fully applying for an adoption.
+-  the logged in user can check the status of an adoption application or an inquiry.
+
 ## Required Pages
 ### 1. Home Page:
 * **Content**: The main part of the page will showcase a photo of our dogs and our 4 main selling points. Includes a brief Introduction to your breed and pups, a brief overview of what you offer, and some high-quality images of the dogs.
@@ -70,12 +80,19 @@
 ### 4. Gallery:
 * **Content**: Photos of the puppies, parents, and any past litters. This gives potential buyers a visual idea of what to
 
+## 5. About Us:
+* **Content**: Information about your breeding practices, your location, and your mission or philosophy.
+  * Why we do what we do and why we love what we do.
+  * Emphasis on an at home family style breeder
+  * Information about your breeding practices, your location, and your mission or philosophy. 
+  * Share stories or backgrounds of how you got into breeding, to create a personal connection with potential buyers.
+* **Extra Tip**: Share stories or backgrounds of how you got into breeding, to create a personal connection with potential buyers.
 
-### Plan of Action:
--  Determine the data model and adjust the repo and model sections accordingly
--  Determine which controllers need kept and which need added.
--  Lay out the ui pages that need added and removed. Scaffold those pages and ensure travel between them works correctly.
--  Setup the new pages with the business logic and use the newly created controllers
--  Work through each page and add detail as needed.
+## 6. Contact Page:
+* **Content**: Provide multiple ways for potential buyers to reach out, including phone numbers, email addresses. Here is where we will add the form to request more information and show interest.
+
+## 7. Policies and Guarantees:
+* **Content**: Detail any guarantees you offer, return policies, or health checks for the puppies. Provide a puppy sales contract and provide explanation for what each section means.
+
 
 
