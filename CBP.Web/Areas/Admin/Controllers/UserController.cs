@@ -37,7 +37,7 @@ namespace CBP.Web.Areas.Admin.Controllers
 
             RoleManagmentVM RoleVM = new RoleManagmentVM()
             {
-                ApplicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId, includeProperties: "Company"),
+                ApplicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId),
                 RoleList = _roleManager.Roles.Select(i => new SelectListItem
                 {
                     Text = i.Name,
@@ -78,7 +78,7 @@ namespace CBP.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<ApplicationUser> objUserList = _unitOfWork.ApplicationUser.GetAll(includeProperties: "Company").ToList();
+            List<ApplicationUser> objUserList = _unitOfWork.ApplicationUser.GetAll().ToList();
 
             foreach (var user in objUserList)
             {

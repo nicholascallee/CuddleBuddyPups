@@ -25,7 +25,7 @@ namespace CBP.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category,ProductImages").ToList();
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "ProductImages").ToList();
             return View(objProductList);
         }
 
