@@ -16,6 +16,8 @@ namespace CBP.Models
         [Required]
         public string Gender { get; set; }
 
+        public string Dob { get; set; }
+
         [Required]
         [Display(Name = "List Price")]
         [Range(1, 10000)]

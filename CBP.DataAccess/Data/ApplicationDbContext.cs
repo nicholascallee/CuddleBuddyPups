@@ -12,12 +12,12 @@ namespace CBP.DataAccess.Data
 
         }
 
-        public DbSet<Dog> Products { get; set; }
+        public DbSet<Dog> Dogs { get; set; }
         public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<OrderHeader> OrderHeaders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
-        public DbSet<DogImage> ProductImages { get; set; }
+        public DbSet<DogImage> DogImages { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -25,87 +25,69 @@ namespace CBP.DataAccess.Data
 
             base.OnModelCreating(modelBuilder);
 
-
-
-           
-
             modelBuilder.Entity<Dog>().HasData(
                 new Dog
                 {
                     Id = 1,
-                    Title = "Fortune of Time",
-                    Author = "Billy Spark",
-                    Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                    ISBN = "SWD9999001",
-                    ListPrice = 99,
-                    Price = 90,
-                    Price50 = 85,
-                    Price100 = 80
-
+                    Name = "Joy",
+                    ListPrice = 1500,
+                    Color = "Blonde",
+                    Gender = "Female",
+                    Dob = "10/2/2023"
                 },
                 new Dog
                 {
                     Id = 2,
-                    Title = "Dark Skies",
-                    Author = "Nancy Hoover",
-                    Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                    ISBN = "CAW777777701",
-                    ListPrice = 40,
-                    Price = 30,
-                    Price50 = 25,
-                    Price100 = 20
-
+                    Name = "Sally",
+                    ListPrice = 1500,
+                    Color = "Black",
+                    Gender = "Female",
+                    Dob = "10/3/2023"
                 },
                 new Dog
                 {
                     Id = 3,
-                    Title = "Vanish in the Sunset",
-                    Author = "Julian Button",
-                    Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                    ISBN = "RITO5555501",
-                    ListPrice = 55,
-                    Price = 50,
-                    Price50 = 40,
-                    Price100 = 35
+                    Name = "Cupid",
+                    ListPrice = 1500,
+                    Color = "Dark Red",
+                    Gender = "Male",
+                    Dob = "10/3/2023"
                 },
                 new Dog
                 {
                     Id = 4,
-                    Title = "Cotton Candy",
-                    Author = "Abby Muscles",
-                    Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                    ISBN = "WS3333333301",
-                    ListPrice = 70,
-                    Price = 65,
-                    Price50 = 60,
-                    Price100 = 55
-
+                    Name = "Comet",
+                    ListPrice = 1500,
+                    Color = "Black",
+                    Gender = "Male",
+                    Dob = "10/2/2023"
                 },
                 new Dog
                 {
                     Id = 5,
-                    Title = "Rock in the Ocean",
-                    Author = "Ron Parker",
-                    Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                    ISBN = "SOTJ1111111101",
-                    ListPrice = 30,
-                    Price = 27,
-                    Price50 = 25,
-                    Price100 = 20
-
+                    Name = "Holly",
+                    ListPrice = 1500,
+                    Color = "Black",
+                    Gender = "Female",
+                    Dob = "10/2/2023"
                 },
                 new Dog
                 {
                     Id = 6,
-                    Title = "Leaves and Wonders",
-                    Author = "Laura Phantom",
-                    Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                    ISBN = "FOT000000001",
-                    ListPrice = 25,
-                    Price = 23,
-                    Price50 = 22,
-                    Price100 = 20
-
+                    Name = "Jack",
+                    ListPrice = 1500,
+                    Color = "Black",
+                    Gender = "Male",
+                    Dob = "10/2/2023"
+                },
+                new Dog
+                {
+                    Id = 6,
+                    Name = "Hope",
+                    ListPrice = 1500,
+                    Color = "Dark Red",
+                    Gender = "Female",
+                    Dob = "10/2/2023"
                 }
 
                 );
