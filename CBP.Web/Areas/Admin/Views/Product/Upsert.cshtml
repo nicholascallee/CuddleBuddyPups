@@ -17,23 +17,23 @@
                     <div class="border p-3">
 
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="@(Model.Title)" class="form-control border-0 shadow" />
-                            <label asp-for="@(Model.Title)" class="ms-2"></label>
-                            <span asp-validation-for="@(Model.Title)" class="text-danger"></span>
+                            <input asp-for="@(Model.Name)" class="form-control border-0 shadow" />
+                            <label asp-for="@(Model.Name)" class="ms-2"></label>
+                            <span asp-validation-for="@(Model.Name)" class="text-danger"></span>
                         </div>
                         <div class="py-2 col-12">
                             <label asp-for="@(Model.Description)" class="ms-2 text-muted"></label>
                             <textarea asp-for="@(Model.Description)" class="form-control border-0 shadow"></textarea>
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="@(Model.ISBN)" class="form-control border-0 shadow" />
-                            <label asp-for="@(Model.ISBN)" class="ms-2"></label>
-                            <span asp-validation-for="@(Model.ISBN)" class="text-danger"></span>
+                            <input asp-for="@(Model.Gender)" class="form-control border-0 shadow" />
+                            <label asp-for="@(Model.Gender)" class="ms-2"></label>
+                            <span asp-validation-for="@(Model.Gender)" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="@(Model.Author)" class="form-control border-0 shadow" />
-                            <label asp-for="@(Model.Author)" class="ms-2"></label>
-                            <span asp-validation-for="@(Model.Author)" class="text-danger"></span>
+                            <input asp-for="@(Model.Color)" class="form-control border-0 shadow" />
+                            <label asp-for="@(Model.Color)" class="ms-2"></label>
+                            <span asp-validation-for="@(Model.Color)" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
                             <input asp-for="@(Model.ListPrice)" class="form-control border-0 shadow" />
@@ -41,13 +41,8 @@
                             <span asp-validation-for="@(Model.ListPrice)" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="@(Model.Price)" class="form-control border-0 shadow" />
-                            <label asp-for="@(Model.Price)" class="ms-2"></label>
-                            <span asp-validation-for="@(Model.Price)" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-12">
                             <input type="file" name="files" class="form-control border-0 shadow" multiple />
-                            <label asp-for="@(Model.ProductImages)" class="ms-2"></label>
+                            <label asp-for="@(Model.DogImages)" class="ms-2"></label>
                         </div>
                         <div class="row pt-2">
                             <div class="col-6 col-md-3">
@@ -69,9 +64,9 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    @if (Model.ProductImages != null)
+                    @if (Model.DogImages != null)
                     {
-                        foreach(var image in Model.ProductImages)
+                        foreach (var image in Model.DogImages)
                         {
                             <div class="border p-1 m-2 text-center">
                                 <img src="@image.ImageUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />

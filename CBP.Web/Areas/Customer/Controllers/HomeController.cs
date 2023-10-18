@@ -25,7 +25,7 @@ namespace CBP.Web.Areas.Customer.Controllers
         public IActionResult Index()
         {
 
-            IEnumerable<Dog> productList = _unitOfWork.Product.GetAll(includeProperties: "ProductImages");
+            IEnumerable<Dog> productList = _unitOfWork.Dog.GetAll(includeProperties: "ProductImages");
             return View(productList);
         }
 
@@ -33,7 +33,7 @@ namespace CBP.Web.Areas.Customer.Controllers
         {
             ShoppingCart cart = new()
             {
-                Dog = _unitOfWork.Product.Get(u => u.Id == productId, includeProperties: "ProductImages"),
+                Dog = _unitOfWork.Dog.Get(u => u.Id == productId, includeProperties: "ProductImages"),
                 Count = 1,
                 DogId = productId
             };

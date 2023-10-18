@@ -25,7 +25,7 @@ namespace CBP.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Dog> objProductList = _unitOfWork.Product.GetAll(includeProperties: "ProductImages").ToList();
+            List<Dog> objProductList = _unitOfWork.Dog.GetAll(includeProperties: "ProductImages").ToList();
             return View(objProductList);
         }
 
@@ -39,7 +39,7 @@ namespace CBP.Web.Areas.Admin.Controllers
             }
             else
             {
-                product = _unitOfWork.Product.Get(u => u.Id == id, includeProperties: "ProductImages");
+                product = _unitOfWork.Dog.Get(u => u.Id == id, includeProperties: "ProductImages");
                 return View(product);
             }
         }
@@ -51,11 +51,11 @@ namespace CBP.Web.Areas.Admin.Controllers
             {
                 if (product.Id == 0)
                 {
-                    _unitOfWork.Product.Add(product);
+                    _unitOfWork.Dog.Add(product);
                 }
                 else
                 {
-                    _unitOfWork.Product.Update(product);
+                    _unitOfWork.Dog.Update(product);
                 }
 
 
@@ -99,7 +99,7 @@ namespace CBP.Web.Areas.Admin.Controllers
                         product.DogImages.Add(productImage);
 
                     }
-                    _unitOfWork.Product.Update(product);
+                    _unitOfWork.Dog.Update(product);
                     _unitOfWork.Save();
                 }
 
@@ -118,14 +118,14 @@ namespace CBP.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Dog> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+            List<Dog> objProductList = _unitOfWork.Dog.GetAll(includeProperties: "Category").ToList();
             return Json(new { data = objProductList });
         }
 
         [HttpDelete]
         public IActionResult Delete(int? id)
         {
-            var productToBeDeleted = _unitOfWork.Product.Get(u => u.Id == id);
+            var productToBeDeleted = _unitOfWork.Dog.Get(u => u.Id == id);
             if (productToBeDeleted == null)
             {
                 return Json(new { success = false, message = "Error while deleting" });
@@ -144,7 +144,7 @@ namespace CBP.Web.Areas.Admin.Controllers
             }
 
 
-            _unitOfWork.Product.Remove(productToBeDeleted);
+            _unitOfWork.Dog.Remove(productToBeDeleted);
             _unitOfWork.Save();
 
             return Json(new { success = true, message = "Delete Successful" });
@@ -153,8 +153,8 @@ namespace CBP.Web.Areas.Admin.Controllers
 
         public IActionResult DeleteImage(int imageId)
         {
-            var imageToBeDeleted = _unitOfWork.ProductImage.Get(u => u.Id == imageId);
-            int productId = imageToBeDeleted.ProductId;
+            var imageToBeDeleted = _unitOfWork.DogImage.Get(u => u.Id == imageId);
+            int productId = imageToBeDeleted.DogId;
             if (imageToBeDeleted != null)
             {
                 var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, imageToBeDeleted.ImageUrl.TrimStart('\\'));
@@ -163,7 +163,7 @@ namespace CBP.Web.Areas.Admin.Controllers
                     System.IO.File.Delete(oldImagePath);
                 }
 
-                _unitOfWork.ProductImage.Remove(imageToBeDeleted);
+                _unitOfWork.DogImage.Remove(imageToBeDeleted);
                 _unitOfWork.Save();
 
                 TempData["success"] = "Deleted Photo Successfully.";

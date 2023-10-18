@@ -34,7 +34,7 @@ namespace CBP.Web.Areas.Customer.Controllers
                 OrderHeader = new()
             };
 
-            IEnumerable<DogImage> productImages = _unitOfWork.ProductImage.GetAll();
+            IEnumerable<DogImage> productImages = _unitOfWork.DogImage.GetAll();
 
 
             foreach (var cart in ShoppingCartVM.ShoppingCartList)

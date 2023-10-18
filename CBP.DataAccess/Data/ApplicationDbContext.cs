@@ -30,6 +30,7 @@ namespace CBP.DataAccess.Data
                 {
                     Id = 1,
                     Name = "Joy",
+                    Description = "Placeholder dog description here.",
                     ListPrice = 1500,
                     Color = "Blonde",
                     Gender = "Female",
@@ -39,7 +40,8 @@ namespace CBP.DataAccess.Data
                 {
                     Id = 2,
                     Name = "Sally",
-                    ListPrice = 1500,
+					Description = "Placeholder dog description here.",
+					ListPrice = 1500,
                     Color = "Black",
                     Gender = "Female",
                     Dob = "10/3/2023"
@@ -48,7 +50,8 @@ namespace CBP.DataAccess.Data
                 {
                     Id = 3,
                     Name = "Cupid",
-                    ListPrice = 1500,
+					Description = "Placeholder dog description here.",
+					ListPrice = 1500,
                     Color = "Dark Red",
                     Gender = "Male",
                     Dob = "10/3/2023"
@@ -57,7 +60,8 @@ namespace CBP.DataAccess.Data
                 {
                     Id = 4,
                     Name = "Comet",
-                    ListPrice = 1500,
+					Description = "Placeholder dog description here.",
+					ListPrice = 1500,
                     Color = "Black",
                     Gender = "Male",
                     Dob = "10/2/2023"
@@ -66,7 +70,8 @@ namespace CBP.DataAccess.Data
                 {
                     Id = 5,
                     Name = "Holly",
-                    ListPrice = 1500,
+					Description = "Placeholder dog description here.",
+					ListPrice = 1500,
                     Color = "Black",
                     Gender = "Female",
                     Dob = "10/2/2023"
@@ -75,16 +80,18 @@ namespace CBP.DataAccess.Data
                 {
                     Id = 6,
                     Name = "Jack",
-                    ListPrice = 1500,
+					Description = "Placeholder dog description here.",
+					ListPrice = 1500,
                     Color = "Black",
                     Gender = "Male",
                     Dob = "10/2/2023"
                 },
                 new Dog
                 {
-                    Id = 6,
+                    Id = 7,
                     Name = "Hope",
-                    ListPrice = 1500,
+					Description = "Placeholder dog description here.",
+					ListPrice = 1500,
                     Color = "Dark Red",
                     Gender = "Female",
                     Dob = "10/2/2023"
