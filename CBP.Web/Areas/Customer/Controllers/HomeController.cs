@@ -33,9 +33,9 @@ namespace CBP.Web.Areas.Customer.Controllers
         {
             ShoppingCart cart = new()
             {
-                Product = _unitOfWork.Product.Get(u => u.Id == productId, includeProperties: "ProductImages"),
+                Dog = _unitOfWork.Product.Get(u => u.Id == productId, includeProperties: "ProductImages"),
                 Count = 1,
-                ProductId = productId
+                DogId = productId
             };
             return View(cart);
         }
@@ -48,7 +48,7 @@ namespace CBP.Web.Areas.Customer.Controllers
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
             shoppingCart.ApplicationUserId = userId;
 
-            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ApplicationUserId == userId && u.ProductId == shoppingCart.ProductId);
+            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ApplicationUserId == userId && u.DogId == shoppingCart.DogId);
 
 
             if (cartFromDb != null)

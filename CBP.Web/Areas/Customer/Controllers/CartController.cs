@@ -30,7 +30,7 @@ namespace CBP.Web.Areas.Customer.Controllers
             ShoppingCartVM = new()
             {
                 ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId,
-                includeProperties: "Product"),
+                includeProperties: "Dog"),
                 OrderHeader = new()
             };
 
@@ -39,8 +39,8 @@ namespace CBP.Web.Areas.Customer.Controllers
 
             foreach (var cart in ShoppingCartVM.ShoppingCartList)
             {
-                cart.Product.ProductImages = productImages.Where(u => u.ProductId == cart.Product.Id).ToList();
-                cart.Price = GetPriceBasedOnQuantity(cart);
+                cart.Dog.DogImages = productImages.Where(u => u.Id == cart.Dog.Id).ToList();
+                cart.Price = cart.Dog.ListPrice;
                 ShoppingCartVM.OrderHeader.OrderTotal += cart.Price * cart.Count;
             }
             return View(ShoppingCartVM);
@@ -56,7 +56,7 @@ namespace CBP.Web.Areas.Customer.Controllers
             ShoppingCartVM = new()
             {
                 ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId,
-                includeProperties: "Product"),
+                includeProperties: "Dog"),
                 OrderHeader = new()
             };
 
@@ -73,7 +73,7 @@ namespace CBP.Web.Areas.Customer.Controllers
 
             foreach (var cart in ShoppingCartVM.ShoppingCartList)
             {
-                cart.Price = GetPriceBasedOnQuantity(cart);
+                cart.Price = cart.Dog.ListPrice;
                 ShoppingCartVM.OrderHeader.OrderTotal += cart.Price * cart.Count;
             }
             return View(ShoppingCartVM);
@@ -86,7 +86,7 @@ namespace CBP.Web.Areas.Customer.Controllers
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            ShoppingCartVM.ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId, includeProperties: "Product");
+            ShoppingCartVM.ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId, includeProperties: "Dog");
 
             ShoppingCartVM.OrderHeader.OrderDate = DateTime.Now;
             ShoppingCartVM.OrderHeader.ApplicationUserId = userId;
@@ -99,7 +99,7 @@ namespace CBP.Web.Areas.Customer.Controllers
 
             foreach (var cart in ShoppingCartVM.ShoppingCartList)
             {
-                cart.Price = GetPriceBasedOnQuantity(cart);
+                cart.Price = cart.Dog.ListPrice;
                 ShoppingCartVM.OrderHeader.OrderTotal += cart.Price * cart.Count;
             }
 
@@ -121,7 +121,7 @@ namespace CBP.Web.Areas.Customer.Controllers
             {
                 OrderDetail orderDetail = new()
                 {
-                    ProductId = cart.ProductId,
+                    DogId = cart.Dog.Id,
                     OrderHeaderId = ShoppingCartVM.OrderHeader.Id,
                     Price = cart.Price,
                     Count = cart.Count
@@ -157,7 +157,7 @@ namespace CBP.Web.Areas.Customer.Controllers
                         Currency = "usd",
                         ProductData = new SessionLineItemPriceDataProductDataOptions
                         {
-                            Name = item.Product.Title
+                            Name = item.Dog.Name
                         }
                     },
                     Quantity = item.Count
@@ -239,29 +239,6 @@ namespace CBP.Web.Areas.Customer.Controllers
             _unitOfWork.Save();
             return RedirectToAction(nameof(Index));
         }
-
-
-
-        private double GetPriceBasedOnQuantity(ShoppingCart shoppingCart)
-        {
-            if (shoppingCart.Count <= 50)
-            {
-                return shoppingCart.Product.Price;
-            }
-            else
-            {
-                if (shoppingCart.Count <= 100)
-                {
-                    return shoppingCart.Product.Price50;
-                }
-                else
-                {
-                    return shoppingCart.Product.Price100;
-                }
-            }
-        }
-
-
 
 
 

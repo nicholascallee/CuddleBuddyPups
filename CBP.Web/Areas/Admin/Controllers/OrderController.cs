@@ -162,7 +162,7 @@ namespace CBP.Web.Areas.Admin.Controllers
                         Currency = "usd",
                         ProductData = new SessionLineItemPriceDataProductDataOptions
                         {
-                            Name = item.Product.Title
+                            Name = item.Dog.Name
                         }
                     },
                     Quantity = item.Count

@@ -65,9 +65,9 @@ namespace CBP.Web.Areas.Admin.Controllers
                 if (files != null)
                 {
                     //if the current product does not contain a list of product images then make one
-                    if (product.ProductImages == null)
+                    if (product.DogImages == null)
                     {
-                        product.ProductImages = new List<DogImage>();
+                        product.DogImages = new List<DogImage>();
                     }
 
                     foreach (IFormFile file in files)
@@ -91,12 +91,12 @@ namespace CBP.Web.Areas.Admin.Controllers
                         DogImage productImage = new()
                         {
                             ImageUrl = @"\" + productPath + fileName,
-                            ProductId = product.Id,
+                            DogId = product.Id,
                         };
 
 
                         //add the product image to the list of images in the view model
-                        product.ProductImages.Add(productImage);
+                        product.DogImages.Add(productImage);
 
                     }
                     _unitOfWork.Product.Update(product);
