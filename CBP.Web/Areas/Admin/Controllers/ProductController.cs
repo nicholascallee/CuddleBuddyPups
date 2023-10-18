@@ -25,13 +25,13 @@ namespace CBP.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "ProductImages").ToList();
+            List<Dog> objProductList = _unitOfWork.Product.GetAll(includeProperties: "ProductImages").ToList();
             return View(objProductList);
         }
 
         public IActionResult Upsert(int? id)
         {
-            Product product = new Product();
+            Dog product = new Dog();
 
             if (id == null || id == 0)
             {
@@ -45,7 +45,7 @@ namespace CBP.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(Product product, List<IFormFile> files)
+        public IActionResult Upsert(Dog product, List<IFormFile> files)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace CBP.Web.Areas.Admin.Controllers
                     //if the current product does not contain a list of product images then make one
                     if (product.ProductImages == null)
                     {
-                        product.ProductImages = new List<ProductImage>();
+                        product.ProductImages = new List<DogImage>();
                     }
 
                     foreach (IFormFile file in files)
@@ -88,7 +88,7 @@ namespace CBP.Web.Areas.Admin.Controllers
                         }
 
                         //create a product image
-                        ProductImage productImage = new()
+                        DogImage productImage = new()
                         {
                             ImageUrl = @"\" + productPath + fileName,
                             ProductId = product.Id,
@@ -118,7 +118,7 @@ namespace CBP.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+            List<Dog> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
             return Json(new { data = objProductList });
         }
 

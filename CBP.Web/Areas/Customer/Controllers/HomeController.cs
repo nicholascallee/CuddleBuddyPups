@@ -25,7 +25,7 @@ namespace CBP.Web.Areas.Customer.Controllers
         public IActionResult Index()
         {
 
-            IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "ProductImages");
+            IEnumerable<Dog> productList = _unitOfWork.Product.GetAll(includeProperties: "ProductImages");
             return View(productList);
         }
 

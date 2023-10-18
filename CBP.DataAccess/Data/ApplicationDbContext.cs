@@ -12,12 +12,12 @@ namespace CBP.DataAccess.Data
 
         }
 
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Dog> Products { get; set; }
         public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<OrderHeader> OrderHeaders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
-        public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<DogImage> ProductImages { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -29,8 +29,8 @@ namespace CBP.DataAccess.Data
 
            
 
-            modelBuilder.Entity<Product>().HasData(
-                new Product
+            modelBuilder.Entity<Dog>().HasData(
+                new Dog
                 {
                     Id = 1,
                     Title = "Fortune of Time",
@@ -43,7 +43,7 @@ namespace CBP.DataAccess.Data
                     Price100 = 80
 
                 },
-                new Product
+                new Dog
                 {
                     Id = 2,
                     Title = "Dark Skies",
@@ -56,7 +56,7 @@ namespace CBP.DataAccess.Data
                     Price100 = 20
 
                 },
-                new Product
+                new Dog
                 {
                     Id = 3,
                     Title = "Vanish in the Sunset",
@@ -68,7 +68,7 @@ namespace CBP.DataAccess.Data
                     Price50 = 40,
                     Price100 = 35
                 },
-                new Product
+                new Dog
                 {
                     Id = 4,
                     Title = "Cotton Candy",
@@ -81,7 +81,7 @@ namespace CBP.DataAccess.Data
                     Price100 = 55
 
                 },
-                new Product
+                new Dog
                 {
                     Id = 5,
                     Title = "Rock in the Ocean",
@@ -94,7 +94,7 @@ namespace CBP.DataAccess.Data
                     Price100 = 20
 
                 },
-                new Product
+                new Dog
                 {
                     Id = 6,
                     Title = "Leaves and Wonders",

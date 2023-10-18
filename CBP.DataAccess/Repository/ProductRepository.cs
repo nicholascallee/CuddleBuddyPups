@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CBP.DataAccess.Repository
 {
-    internal class ProductRepository : Repository<Product>, IProductRepository
+    internal class ProductRepository : Repository<Dog>, IProductRepository
     {
         private ApplicationDbContext _db;
         public ProductRepository(ApplicationDbContext db) : base(db)
@@ -17,7 +17,7 @@ namespace CBP.DataAccess.Repository
             _db = db;
         }
 
-        public void Update(Product obj)
+        public void Update(Dog obj)
         {
             var objFromDb = _db.Products.FirstOrDefault(u => u.Id == obj.Id);
             if (objFromDb != null)

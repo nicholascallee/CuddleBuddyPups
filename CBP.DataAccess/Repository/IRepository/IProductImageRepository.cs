@@ -3,8 +3,8 @@
 
 namespace CBP.DataAccess.Repository.IRepository
 {
-    public interface IProductImageRepository : IRepository<ProductImage>
+    public interface IProductImageRepository : IRepository<DogImage>
     {
-        void Update(ProductImage obj);
+        void Update(DogImage obj);
     }
 }

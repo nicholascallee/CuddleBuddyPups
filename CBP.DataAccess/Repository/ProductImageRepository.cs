@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CBP.DataAccess.Repository
 {
-    public class ProductImageRepository : Repository<ProductImage>, IProductImageRepository
+    public class ProductImageRepository : Repository<DogImage>, IProductImageRepository
     {
         private ApplicationDbContext _db;
         public ProductImageRepository(ApplicationDbContext db) : base(db)
@@ -18,7 +18,7 @@ namespace CBP.DataAccess.Repository
             _db = db;
         }
 
-        public void Update(ProductImage obj)
+        public void Update(DogImage obj)
         {
             _db.ProductImages.Update(obj);
         }
