@@ -39,7 +39,7 @@ namespace CBP.Web.Areas.Admin.Controllers
             OrderVM = new()
             {
                 OrderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == orderId, includeProperties: "ApplicationUser"),
-                OrderDetail = _unitOfWork.OrderDetail.GetAll(u => u.OrderHeaderId == orderId, includeProperties: "Product")
+                OrderDetail = _unitOfWork.OrderDetail.GetAll(u => u.OrderHeaderId == orderId, includeProperties: "Dog")
             };
 
             return View(OrderVM);
@@ -140,7 +140,7 @@ namespace CBP.Web.Areas.Admin.Controllers
             OrderVM.OrderHeader = _unitOfWork.OrderHeader
                 .Get(u => u.Id == OrderVM.OrderHeader.Id, includeProperties: "ApplicationUser");
             OrderVM.OrderDetail = _unitOfWork.OrderDetail
-                .GetAll(u => u.OrderHeaderId == OrderVM.OrderHeader.Id, includeProperties: "Product");
+                .GetAll(u => u.OrderHeaderId == OrderVM.OrderHeader.Id, includeProperties: "Dog");
 
             //stripe logic
             var domain = Request.Scheme + "://" + Request.Host.Value + "/";

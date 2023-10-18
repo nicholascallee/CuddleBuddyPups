@@ -7,10 +7,12 @@ function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         "ajax": { url: '/admin/product/getall' },
         "columns": [
-            { data: 'title', "width": "25%" },
-            { data: 'isbn', "width": "15%" },
-            { data: 'listPrice', "width": "10%" },
-            { data: 'author', "width": "15%" },
+            { data: 'Name', "width": "25%" },
+            { data: 'Description', "width": "10%" },
+            { data: 'Color', "width": "15%" },
+            { data: 'Gender', "width": "10%" },
+            { data: 'Dob', "width": "10%" },
+            { data: 'listPrice', "width": "15%" },
             {
                 data: 'id',
                 "render": function (data) {
@@ -21,7 +23,7 @@ function loadDataTable() {
                             <i class="bi bi-trash-fill"></i> Delete</a>
                     </div>`
                 },
-                "width": "25%"
+                "width": "15%"
             }
         ]
     });
@@ -62,7 +64,7 @@ function Delete(url) {
         ) {
             swalWithBootstrapButtons.fire(
                 'Cancelled',
-                'Your Product is safe :)',
+                'Your Dog Listing is safe :)',
                 'error'
             )
         }
