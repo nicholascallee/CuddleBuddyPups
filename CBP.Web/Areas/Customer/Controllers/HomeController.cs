@@ -3,7 +3,6 @@ using CBP.Models.ViewModels;
 using CBP.Models;
 using CBP.Utility;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
@@ -29,13 +28,13 @@ namespace CBP.Web.Areas.Customer.Controllers
             return View(productList);
         }
 
-        public IActionResult Details(int productId)
+        public IActionResult Details(int dogId)
         {
             ShoppingCart cart = new()
             {
-                Dog = _unitOfWork.Dog.Get(u => u.Id == productId, includeProperties: "DogImages"),
+                Dog = _unitOfWork.Dog.Get(u => u.Id == dogId, includeProperties: "DogImages"),
                 Count = 1,
-                DogId = productId
+                DogId = dogId
             };
             return View(cart);
         }

@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-12 text-center">
                     <h3 class="text-white text-uppercase">@Model.Dog.Name</h3>
-                    <p class="text-white-50 fw-semibold mb-0">by @Model.Dog.Gender</p>
+                    <p class="text-white-50 fw-semibold mb-0">Gender: @Model.Dog.Gender</p>
                 </div>
             </div>
         </div>
@@ -22,11 +22,6 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-lg-3 offset-lg-1 text-center mb-3">
-
-
-
-
-
                         @if (Model.Dog.DogImages != null && Model.Dog.DogImages.Count() > 0)
                         {
                         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
@@ -54,12 +49,6 @@
                             </button>
                         </div>
                         }
-
-
-
-
-
-
 @*                         <img src="@Model.Product.ImageUrl" width="100%" class="rounded" /> *@
                     </div>
                     <div class="col-12 col-lg-6 offset-lg-1">
@@ -70,7 +59,7 @@
                         <div class="row ps-2">
                             <h6 class="text-dark text-opacity-50  pb-2">
                                 List Price:
-                                <span class="text-decoration-line-through">
+                                <span class="text-dark pb-2">
                                     @Model.Dog.ListPrice.ToString("c")
                                 </span>
                             </h6>

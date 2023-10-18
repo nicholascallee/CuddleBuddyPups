@@ -25,7 +25,7 @@ namespace CBP.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Dog> objProductList = _unitOfWork.Dog.GetAll(includeProperties: "ProductImages").ToList();
+            List<Dog> objProductList = _unitOfWork.Dog.GetAll(includeProperties: "DogImages").ToList();
             return View(objProductList);
         }
 
@@ -39,7 +39,7 @@ namespace CBP.Web.Areas.Admin.Controllers
             }
             else
             {
-                product = _unitOfWork.Dog.Get(u => u.Id == id, includeProperties: "ProductImages");
+                product = _unitOfWork.Dog.Get(u => u.Id == id, includeProperties: "DogImages");
                 return View(product);
             }
         }
@@ -73,7 +73,7 @@ namespace CBP.Web.Areas.Admin.Controllers
                     foreach (IFormFile file in files)
                     {
                         string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                        string productPath = @"images\products\product-" + product.Id + @"\";
+                        string productPath = @"images\Dogs\Dog-" + product.Id + @"\";
                         string finalPath = Path.Combine(wwwRootPath, productPath);
 
                         //create folder for product
@@ -104,7 +104,7 @@ namespace CBP.Web.Areas.Admin.Controllers
                 }
 
 
-                TempData["success"] = "Product created/updated successfully";
+                TempData["success"] = "Dog created/updated successfully";
                 return RedirectToAction("Index");
             }
             else
@@ -118,7 +118,7 @@ namespace CBP.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Dog> objProductList = _unitOfWork.Dog.GetAll(includeProperties: "Category").ToList();
+            List<Dog> objProductList = _unitOfWork.Dog.GetAll().ToList();
             return Json(new { data = objProductList });
         }
 
@@ -130,7 +130,7 @@ namespace CBP.Web.Areas.Admin.Controllers
             {
                 return Json(new { success = false, message = "Error while deleting" });
             }
-            string productPath = @"images\product-" + id;
+            string productPath = @"images\Dogs\Dog-" + id + @"\";
             string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, productPath);
 
             if (Directory.Exists(finalPath))

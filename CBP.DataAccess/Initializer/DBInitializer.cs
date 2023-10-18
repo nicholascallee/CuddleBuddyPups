@@ -54,9 +54,10 @@ namespace CBP.DataAccess.Initializer
                     State = "Missouri",
                     PostalCode = "64119",
                     City = "Maryville",
+                    Role = SD.Role_Admin,
 
                 },
-                "REMOVED").GetAwaiter().GetResult();
+                "Admin123!").GetAwaiter().GetResult();
 
 
                 ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "nicholascallee@gmail.com");
