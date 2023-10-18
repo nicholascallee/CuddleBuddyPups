@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CBP.DataAccess.Repository.IRepository
+﻿namespace CBP.DataAccess.Repository.IRepository
 {
     public interface IUnitOfWork
     {
 
-        IProductRepository Product { get; }
+        IDogRepository Dog { get; }
 
 
         IShoppingCartRepository ShoppingCart { get; }
@@ -19,7 +13,7 @@ namespace CBP.DataAccess.Repository.IRepository
         IOrderDetailRepository OrderDetail { get; }
         IOrderHeaderRepository OrderHeader { get; }
 
-        IProductImageRepository ProductImage { get; }
+        IDogImageRepository DogImage { get; }
 
 
         void Save();

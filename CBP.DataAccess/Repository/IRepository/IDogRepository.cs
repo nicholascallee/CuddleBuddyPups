@@ -2,7 +2,7 @@
 
 namespace CBP.DataAccess.Repository.IRepository
 {
-    public interface IProductRepository : IRepository<Dog>
+    public interface IDogRepository : IRepository<Dog>
     {
         void Update(Dog obj);
     }

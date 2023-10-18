@@ -6,7 +6,7 @@ namespace CBP.DataAccess.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private ApplicationDbContext _db;
-        public IProductRepository Product { get; private set; }
+        public IDogRepository Dog { get; private set; }
 
         public IShoppingCartRepository ShoppingCart { get; private set; }
 
@@ -15,7 +15,7 @@ namespace CBP.DataAccess.Repository
         public IOrderDetailRepository OrderDetail { get; private set; }
         public IOrderHeaderRepository OrderHeader { get; private set; }
 
-        public IProductImageRepository ProductImage { get; private set; }
+        public IDogImageRepository DogImage { get; private set; }
 
 
 
@@ -23,11 +23,11 @@ namespace CBP.DataAccess.Repository
         {
             _db = db;
             ShoppingCart = new ShoppingCartRepository(_db);
-            Product = new ProductRepository(_db);
+            Dog = new DogRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
             OrderDetail = new OrderDetailRepository(_db);
             OrderHeader = new OrderHeaderRepository(_db);
-            ProductImage = new ProductImageRepository(_db);
+            DogImage = new DogImageRepository(_db);
         }
 
         public void Save()
