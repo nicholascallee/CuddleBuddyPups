@@ -11,25 +11,39 @@
     <div class="card-body p-4">
         <form method="post" class="row" enctype="multipart/form-data">
             <input asp-for="@(Model.Id)" hidden />
-
             <div class="row">
                 <div class="col-10">
                     <div class="border p-3">
-
                         <div class="form-floating py-2 col-12">
                             <input asp-for="@(Model.Name)" class="form-control border-0 shadow" />
                             <label asp-for="@(Model.Name)" class="ms-2"></label>
                             <span asp-validation-for="@(Model.Name)" class="text-danger"></span>
                         </div>
-                        <div class="py-2 col-12">
-                            <label asp-for="@(Model.Description)" class="ms-2 text-muted"></label>
-                            <textarea asp-for="@(Model.Description)" class="form-control border-0 shadow"></textarea>
-                        </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="@(Model.Gender)" class="form-control border-0 shadow" />
+                            <textarea asp-for="@(Model.Description)" class="form-control border-0 shadow"></textarea>
+                            <label asp-for="@(Model.Description)" class="ms-2"></label>
+                        </div>
+
+                        @{
+                            var genders = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>
+                        {
+                        new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = "Male", Value = "Male" },
+                        new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = "Female", Value = "Female" }
+                        };
+                        }
+
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="@(Model.Gender)" class="form-control border-0 shadow">
+                                <option value="" disabled selected>---pick a gender---</option>
+                                @foreach (var gender in genders)
+                                {
+                                    <option value="@gender.Value">@gender.Text</option>
+                                }
+                            </select>
                             <label asp-for="@(Model.Gender)" class="ms-2"></label>
                             <span asp-validation-for="@(Model.Gender)" class="text-danger"></span>
                         </div>
+                        
                         <div class="form-floating py-2 col-12">
                             <input asp-for="@(Model.Color)" class="form-control border-0 shadow" />
                             <label asp-for="@(Model.Color)" class="ms-2"></label>
@@ -39,6 +53,11 @@
                             <input asp-for="@(Model.ListPrice)" class="form-control border-0 shadow" />
                             <label asp-for="@(Model.ListPrice)" class="ms-2"></label>
                             <span asp-validation-for="@(Model.ListPrice)" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="@(Model.Dob)" class="form-control border-0 shadow" />
+                            <label asp-for="@(Model.Dob)" class="ms-2"></label>
+                            <span asp-validation-for="@(Model.Dob)" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
                             <input type="file" name="files" class="form-control border-0 shadow" multiple />
@@ -85,15 +104,6 @@
 
 
 @section Scripts{
-
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            plugins: 'autolink charmap codesample lists wordcount casechange export formatpainter powerpaste tinymcespellchecker autocorrect',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline | link | charmap',
-            });
-    </script>
-
 
     @{
         <partial name="_ValidationScriptsPartial"/>

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -297,13 +298,13 @@ namespace CBP.DataAccess.Migrations
                 columns: new[] { "Id", "Color", "Description", "Dob", "Gender", "ListPrice", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Blonde", "Placeholder dog description here.", "10/2/2023", "Female", 1500.0, "Joy" },
-                    { 2, "Black", "Placeholder dog description here.", "10/3/2023", "Female", 1500.0, "Sally" },
-                    { 3, "Dark Red", "Placeholder dog description here.", "10/3/2023", "Male", 1500.0, "Cupid" },
-                    { 4, "Black", "Placeholder dog description here.", "10/2/2023", "Male", 1500.0, "Comet" },
-                    { 5, "Black", "Placeholder dog description here.", "10/2/2023", "Female", 1500.0, "Holly" },
-                    { 6, "Black", "Placeholder dog description here.", "10/2/2023", "Male", 1500.0, "Jack" },
-                    { 7, "Dark Red", "Placeholder dog description here.", "10/2/2023", "Female", 1500.0, "Hope" }
+                    { 1, "Blonde", "Placeholder dog description here.", "10-2-2023", "Female", 1500.0, "Joy" },
+                    { 2, "Black", "Placeholder dog description here.", "10-3-2023", "Female", 1500.0, "Sally" },
+                    { 3, "Dark Red", "Placeholder dog description here.", "10-3-2023", "Male", 1500.0, "Cupid" },
+                    { 4, "Black", "Placeholder dog description here.", "10-2-2023", "Male", 1500.0, "Comet" },
+                    { 5, "Black", "Placeholder dog description here.", "10-2-2023", "Female", 1500.0, "Holly" },
+                    { 6, "Black", "Placeholder dog description here.", "10-2-2023", "Male", 1500.0, "Jack" },
+                    { 7, "Dark Red", "Placeholder dog description here.", "10-2-2023", "Female", 1500.0, "Hope" }
                 });
 
             migrationBuilder.CreateIndex(

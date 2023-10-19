@@ -1,11 +1,9 @@
 ﻿using CBP.DataAccess.Repository.IRepository;
 using CBP.Models;
-using CBP.Models.ViewModels;
 using CBP.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections.Generic;
 
 namespace CBP.Web.Areas.Admin.Controllers
 {
@@ -15,12 +13,14 @@ namespace CBP.Web.Areas.Admin.Controllers
     public class DogController : Controller
     {
 
+
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
         public DogController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
+            
         }
 
         public IActionResult Index()

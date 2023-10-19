@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CBP.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231018050631_InitialCreate")]
+    [Migration("20231019221829_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -66,7 +66,7 @@ namespace CBP.DataAccess.Migrations
                             Id = 1,
                             Color = "Blonde",
                             Description = "Placeholder dog description here.",
-                            Dob = "10/2/2023",
+                            Dob = "10-2-2023",
                             Gender = "Female",
                             ListPrice = 1500.0,
                             Name = "Joy"
@@ -76,7 +76,7 @@ namespace CBP.DataAccess.Migrations
                             Id = 2,
                             Color = "Black",
                             Description = "Placeholder dog description here.",
-                            Dob = "10/3/2023",
+                            Dob = "10-3-2023",
                             Gender = "Female",
                             ListPrice = 1500.0,
                             Name = "Sally"
@@ -86,7 +86,7 @@ namespace CBP.DataAccess.Migrations
                             Id = 3,
                             Color = "Dark Red",
                             Description = "Placeholder dog description here.",
-                            Dob = "10/3/2023",
+                            Dob = "10-3-2023",
                             Gender = "Male",
                             ListPrice = 1500.0,
                             Name = "Cupid"
@@ -96,7 +96,7 @@ namespace CBP.DataAccess.Migrations
                             Id = 4,
                             Color = "Black",
                             Description = "Placeholder dog description here.",
-                            Dob = "10/2/2023",
+                            Dob = "10-2-2023",
                             Gender = "Male",
                             ListPrice = 1500.0,
                             Name = "Comet"
@@ -106,7 +106,7 @@ namespace CBP.DataAccess.Migrations
                             Id = 5,
                             Color = "Black",
                             Description = "Placeholder dog description here.",
-                            Dob = "10/2/2023",
+                            Dob = "10-2-2023",
                             Gender = "Female",
                             ListPrice = 1500.0,
                             Name = "Holly"
@@ -116,7 +116,7 @@ namespace CBP.DataAccess.Migrations
                             Id = 6,
                             Color = "Black",
                             Description = "Placeholder dog description here.",
-                            Dob = "10/2/2023",
+                            Dob = "10-2-2023",
                             Gender = "Male",
                             ListPrice = 1500.0,
                             Name = "Jack"
@@ -126,7 +126,7 @@ namespace CBP.DataAccess.Migrations
                             Id = 7,
                             Color = "Dark Red",
                             Description = "Placeholder dog description here.",
-                            Dob = "10/2/2023",
+                            Dob = "10-2-2023",
                             Gender = "Female",
                             ListPrice = 1500.0,
                             Name = "Hope"
@@ -518,13 +518,13 @@ namespace CBP.DataAccess.Migrations
 
             modelBuilder.Entity("CBP.Models.DogImage", b =>
                 {
-                    b.HasOne("CBP.Models.Dog", "Product")
+                    b.HasOne("CBP.Models.Dog", "Dog")
                         .WithMany("DogImages")
                         .HasForeignKey("DogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("Dog");
                 });
 
             modelBuilder.Entity("CBP.Models.OrderDetail", b =>

@@ -34,7 +34,7 @@ namespace CBP.DataAccess.Data
                     ListPrice = 1500,
                     Color = "Blonde",
                     Gender = "Female",
-                    Dob = "10/2/2023"
+                    Dob = "10-2-2023"
                 },
                 new Dog
                 {
@@ -44,7 +44,7 @@ namespace CBP.DataAccess.Data
 					ListPrice = 1500,
                     Color = "Black",
                     Gender = "Female",
-                    Dob = "10/3/2023"
+                    Dob = "10-3-2023"
                 },
                 new Dog
                 {
@@ -54,7 +54,7 @@ namespace CBP.DataAccess.Data
 					ListPrice = 1500,
                     Color = "Dark Red",
                     Gender = "Male",
-                    Dob = "10/3/2023"
+                    Dob = "10-3-2023"
                 },
                 new Dog
                 {
@@ -64,7 +64,7 @@ namespace CBP.DataAccess.Data
 					ListPrice = 1500,
                     Color = "Black",
                     Gender = "Male",
-                    Dob = "10/2/2023"
+                    Dob = "10-2-2023"
                 },
                 new Dog
                 {
@@ -74,7 +74,7 @@ namespace CBP.DataAccess.Data
 					ListPrice = 1500,
                     Color = "Black",
                     Gender = "Female",
-                    Dob = "10/2/2023"
+                    Dob = "10-2-2023"
                 },
                 new Dog
                 {
@@ -84,7 +84,7 @@ namespace CBP.DataAccess.Data
 					ListPrice = 1500,
                     Color = "Black",
                     Gender = "Male",
-                    Dob = "10/2/2023"
+                    Dob = "10-2-2023"
                 },
                 new Dog
                 {
@@ -94,7 +94,7 @@ namespace CBP.DataAccess.Data
 					ListPrice = 1500,
                     Color = "Dark Red",
                     Gender = "Female",
-                    Dob = "10/2/2023"
+                    Dob = "10-2-2023"
                 }
 
                 );

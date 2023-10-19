@@ -15,7 +15,7 @@ namespace CBP.Models
         public string Color { get; set; }
         [Required]
         public string Gender { get; set; }
-
+        [Required]
         public string Dob { get; set; }
 
         [Required]

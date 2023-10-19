@@ -140,7 +140,7 @@ namespace CBP.Web.Areas.Identity.Pages.Account
                     Text = i,
                     Value = i
                 })
-            };
+        };
 
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
