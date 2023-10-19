@@ -12,12 +12,12 @@ namespace CBP.Web.Areas.Admin.Controllers
     [Area("Admin")]
     [Authorize(Roles = SD.Role_Admin)]
 
-    public class ProductController : Controller
+    public class DogController : Controller
     {
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
+        public DogController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
@@ -25,37 +25,37 @@ namespace CBP.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Dog> objProductList = _unitOfWork.Dog.GetAll(includeProperties: "DogImages").ToList();
-            return View(objProductList);
+            List<Dog> objDogList = _unitOfWork.Dog.GetAll(includeProperties: "DogImages").ToList();
+            return View(objDogList);
         }
 
         public IActionResult Upsert(int? id)
         {
-            Dog product = new Dog();
+            Dog dog = new Dog();
 
             if (id == null || id == 0)
             {
-                return View(product);
+                return View(dog);
             }
             else
             {
-                product = _unitOfWork.Dog.Get(u => u.Id == id, includeProperties: "DogImages");
-                return View(product);
+                dog = _unitOfWork.Dog.Get(u => u.Id == id, includeProperties: "DogImages");
+                return View(dog);
             }
         }
 
         [HttpPost]
-        public IActionResult Upsert(Dog product, List<IFormFile> files)
+        public IActionResult Upsert(Dog dog, List<IFormFile> files)
         {
             if (ModelState.IsValid)
             {
-                if (product.Id == 0)
+                if (dog.Id == 0)
                 {
-                    _unitOfWork.Dog.Add(product);
+                    _unitOfWork.Dog.Add(dog);
                 }
                 else
                 {
-                    _unitOfWork.Dog.Update(product);
+                    _unitOfWork.Dog.Update(dog);
                 }
 
 
@@ -64,42 +64,42 @@ namespace CBP.Web.Areas.Admin.Controllers
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
                 if (files != null)
                 {
-                    //if the current product does not contain a list of product images then make one
-                    if (product.DogImages == null)
+                    //if the current dog does not contain a list of dog images then make one
+                    if (dog.DogImages == null)
                     {
-                        product.DogImages = new List<DogImage>();
+                        dog.DogImages = new List<DogImage>();
                     }
 
                     foreach (IFormFile file in files)
                     {
                         string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                        string productPath = @"images\Dogs\Dog-" + product.Id + @"\";
-                        string finalPath = Path.Combine(wwwRootPath, productPath);
+                        string dogPath = @"images\Dogs\Dog-" + dog.Id + @"\";
+                        string finalPath = Path.Combine(wwwRootPath, dogPath);
 
-                        //create folder for product
+                        //create folder for dog
                         if (!Directory.Exists(finalPath))
                         {
                             Directory.CreateDirectory(finalPath);
                         }
-                        //copy photos to folder for product
+                        //copy photos to folder for dog
                         using (var fileStream = new FileStream(Path.Combine(finalPath, fileName), FileMode.Create))
                         {
                             file.CopyTo(fileStream);
                         }
 
-                        //create a product image
-                        DogImage productImage = new()
+                        //create a dog image
+                        DogImage dogImage = new()
                         {
-                            ImageUrl = @"\" + productPath + fileName,
-                            DogId = product.Id,
+                            ImageUrl = @"\" + dogPath + fileName,
+                            DogId = dog.Id,
                         };
 
 
-                        //add the product image to the list of images in the view model
-                        product.DogImages.Add(productImage);
+                        //add the dog image to the list of images in the view model
+                        dog.DogImages.Add(dogImage);
 
                     }
-                    _unitOfWork.Dog.Update(product);
+                    _unitOfWork.Dog.Update(dog);
                     _unitOfWork.Save();
                 }
 
@@ -109,7 +109,7 @@ namespace CBP.Web.Areas.Admin.Controllers
             }
             else
             {
-                return View(product);
+                return View(dog);
             }
         }
 
@@ -118,20 +118,20 @@ namespace CBP.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Dog> objProductList = _unitOfWork.Dog.GetAll().ToList();
-            return Json(new { data = objProductList });
+            List<Dog> objDogList = _unitOfWork.Dog.GetAll().ToList();
+            return Json(new { data = objDogList });
         }
 
         [HttpDelete]
         public IActionResult Delete(int? id)
         {
-            var productToBeDeleted = _unitOfWork.Dog.Get(u => u.Id == id);
-            if (productToBeDeleted == null)
+            var dogToBeDeleted = _unitOfWork.Dog.Get(u => u.Id == id);
+            if (dogToBeDeleted == null)
             {
                 return Json(new { success = false, message = "Error while deleting" });
             }
-            string productPath = @"images\Dogs\Dog-" + id + @"\";
-            string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, productPath);
+            string dogPath = @"images\Dogs\Dog-" + id + @"\";
+            string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, dogPath);
 
             if (Directory.Exists(finalPath))
             {
@@ -144,7 +144,7 @@ namespace CBP.Web.Areas.Admin.Controllers
             }
 
 
-            _unitOfWork.Dog.Remove(productToBeDeleted);
+            _unitOfWork.Dog.Remove(dogToBeDeleted);
             _unitOfWork.Save();
 
             return Json(new { success = true, message = "Delete Successful" });
@@ -154,7 +154,7 @@ namespace CBP.Web.Areas.Admin.Controllers
         public IActionResult DeleteImage(int imageId)
         {
             var imageToBeDeleted = _unitOfWork.DogImage.Get(u => u.Id == imageId);
-            int productId = imageToBeDeleted.DogId;
+            int dogId = imageToBeDeleted.DogId;
             if (imageToBeDeleted != null)
             {
                 var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, imageToBeDeleted.ImageUrl.TrimStart('\\'));
@@ -168,7 +168,7 @@ namespace CBP.Web.Areas.Admin.Controllers
 
                 TempData["success"] = "Deleted Photo Successfully.";
             }
-            return RedirectToAction(nameof(Upsert), new { id = productId });
+            return RedirectToAction(nameof(Upsert), new { id = dogId });
         }
 
         #endregion

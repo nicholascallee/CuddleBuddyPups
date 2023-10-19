@@ -5,7 +5,7 @@ $(document).ready(function () {
 
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
-        "ajax": { url: '/admin/product/getall' },
+        "ajax": { url: '/admin/dog/getall' },
         "columns": [
             { data: 'Name', "width": "25%" },
             { data: 'Description', "width": "10%" },
@@ -17,9 +17,9 @@ function loadDataTable() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-75 btn-group" role="group">
-                        <a href="/admin/product/upsert?id=${data}" class="btn btn-primary mx-2">
+                        <a href="/admin/dog/upsert?id=${data}" class="btn btn-primary mx-2">
                             <i class="bi bi-pencil-square"></i> Edit</a>
-                        <a onClick=Delete('/admin/product/delete/${data}') class="btn btn-danger mx-2">
+                        <a onClick=Delete('/admin/dog/delete/${data}') class="btn btn-danger mx-2">
                             <i class="bi bi-trash-fill"></i> Delete</a>
                     </div>`
                 },

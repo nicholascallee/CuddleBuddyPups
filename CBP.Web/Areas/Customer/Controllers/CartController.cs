@@ -34,12 +34,12 @@ namespace CBP.Web.Areas.Customer.Controllers
                 OrderHeader = new()
             };
 
-            IEnumerable<DogImage> productImages = _unitOfWork.DogImage.GetAll();
+            IEnumerable<DogImage> dogImages = _unitOfWork.DogImage.GetAll();
 
 
             foreach (var cart in ShoppingCartVM.ShoppingCartList)
             {
-                cart.Dog.DogImages = productImages.Where(u => u.Id == cart.Dog.Id).ToList();
+                cart.Dog.DogImages = dogImages.Where(u => u.Id == cart.Dog.Id).ToList();
                 cart.Price = cart.Dog.ListPrice;
                 ShoppingCartVM.OrderHeader.OrderTotal += cart.Price * cart.Count;
             }
