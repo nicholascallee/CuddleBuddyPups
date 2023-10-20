@@ -30,10 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Areas\Customer\Views\Home\Details.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="wwwroot\images\dogs\" />
   </ItemGroup>
 

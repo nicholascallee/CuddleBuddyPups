@@ -26,6 +26,33 @@ namespace CBP.Web.Areas.Customer.Controllers
 
             return View();
         }
+        public IActionResult GoldenDoodleInfo()
+        {
+
+            return View();
+        }
+        public IActionResult Gallery()
+        {
+
+            return View();
+        }
+        public IActionResult ContractAndPolicies()
+        {
+
+            return View();
+        }
+        
+        public IActionResult About()
+        {
+
+            return View();
+        }
+        public IActionResult Bootcamp()
+        {
+
+            return View();
+        }
+
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
