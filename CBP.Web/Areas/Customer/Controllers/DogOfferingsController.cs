@@ -15,10 +15,10 @@ namespace CBP.Web.Areas.Customer.Controllers
 
 
 
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<DogOfferingsController> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
-        public DogOfferingsController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
+        public DogOfferingsController(ILogger<DogOfferingsController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
