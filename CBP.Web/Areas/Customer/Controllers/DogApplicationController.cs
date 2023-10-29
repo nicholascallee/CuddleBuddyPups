@@ -35,13 +35,22 @@ namespace CBP.Web.Areas.Customer.Controllers
         }
 
 
+        public IActionResult NewApplication() => RedirectToAction(nameof(ApplicationDetails), -1);
+
 
         public IActionResult ApplicationDetails(int applicationDetailId)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
-            CurrentDogApplication = _unitOfWork.DogApplicationDetail.Get(u => u.Id == applicationDetailId,
-                includeProperties: "Dog");
+            if (applicationDetailId == -1)
+            {
+                CurrentDogApplication = new DogApplicationDetail();
+            }
+            else
+            {
+                CurrentDogApplication = _unitOfWork.DogApplicationDetail.Get(u => u.Id == applicationDetailId,
+               includeProperties: "Dog");
+            }
             return View(CurrentDogApplication);
         }
 

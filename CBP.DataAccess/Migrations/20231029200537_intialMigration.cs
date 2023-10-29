@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CBP.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class intialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -219,6 +219,46 @@ namespace CBP.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DogApplicationDetails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DogId = table.Column<int>(type: "int", nullable: false),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ApplicationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ApplicationStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Answer1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Answer2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Answer3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Answer4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Answer5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StreetAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DogApplicationDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DogApplicationDetails_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DogApplicationDetails_Dogs_DogId",
+                        column: x => x.DogId,
+                        principalTable: "Dogs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DogImages",
                 columns: table => new
                 {
@@ -347,6 +387,16 @@ namespace CBP.DataAccess.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DogApplicationDetails_ApplicationUserId",
+                table: "DogApplicationDetails",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DogApplicationDetails_DogId",
+                table: "DogApplicationDetails",
+                column: "DogId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DogImages_DogId",
                 table: "DogImages",
                 column: "DogId");
@@ -394,6 +444,9 @@ namespace CBP.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "DogApplicationDetails");
 
             migrationBuilder.DropTable(
                 name: "DogImages");
