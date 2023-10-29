@@ -14,7 +14,7 @@
         IOrderHeaderRepository OrderHeader { get; }
 
         IDogImageRepository DogImage { get; }
-
+        IDogApplicationDetailRepository DogApplicationDetail { get; }
 
         void Save();
     }

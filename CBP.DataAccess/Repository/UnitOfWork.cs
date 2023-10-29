@@ -16,6 +16,7 @@ namespace CBP.DataAccess.Repository
         public IOrderHeaderRepository OrderHeader { get; private set; }
 
         public IDogImageRepository DogImage { get; private set; }
+        public IDogApplicationDetailRepository DogApplicationDetail { get; private set; }
 
 
 
@@ -28,6 +29,7 @@ namespace CBP.DataAccess.Repository
             OrderDetail = new OrderDetailRepository(_db);
             OrderHeader = new OrderHeaderRepository(_db);
             DogImage = new DogImageRepository(_db);
+            DogApplicationDetail = new DogApplicationDetailRepository(_db);
         }
 
         public void Save()

@@ -18,6 +18,7 @@ namespace CBP.DataAccess.Data
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<DogImage> DogImages { get; set; }
+        public DbSet<DogApplicationDetail> DogApplicationDetails { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CBP.Utility
+﻿namespace CBP.Utility
 {
     public static class SD
     {
@@ -14,15 +8,14 @@ namespace CBP.Utility
 
 
         public const string PaymentStatusPending = "Pending";
-        public const string PaymentStatusApproved = "Approved";
-        public const string PaymentStatusDelayedPayment = "ApprovedForDelayedPayment";
-        public const string PaymentStatusRejected = "Rejected";
+        public const string PaymentStatusPaid = "Paid";
+        public const string PaymentStatusDownpayment = "DownpaymentMade";
 
 
-        public const string StatusPending = "Pending";
+        public const string StatusInReview = "InReview";
         public const string StatusApproved = "Approved";
-        public const string StatusInProcess = "Processing";
-        public const string StatusShipped = "Shipped";
+        public const string StatusInProgress = "InProgress";
+        public const string StatusFinalized = "Finalized";
         public const string StatusCancelled = "Cancelled";
         public const string StatusRefunded = "Refunded";
 
