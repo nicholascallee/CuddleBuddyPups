@@ -17,6 +17,7 @@ namespace CBP.Web.Areas.Customer.Controllers
         [BindProperty]
         public IEnumerable <DogApplicationDetail> DogApplicationList { get; set; }
         public DogApplicationDetail CurrentDogApplication { get; set; }
+        public Dog currentDog { get; set; }
 
         public DogApplicationDetailVM DogApplicationDetailVM { get; set; }
 
@@ -40,37 +41,75 @@ namespace CBP.Web.Areas.Customer.Controllers
 
 
 
-        public IActionResult Upsert(int? id)
+        public IActionResult Upsert(int? id, int? dogId)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var appUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
 
-            DogApplicationDetail dogApplicationDetail = new()
-            {
-                ApplicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId),
-                ApplicationUserId = userId,
-                Name = _unitOfWork.ApplicationUser.Get(u => u.Id == userId).Name
-            };
-
+            DogApplicationDetail dogApplicationDetail;
             if (id.HasValue && id.Value != 0)
             {
                 dogApplicationDetail = _unitOfWork.DogApplicationDetail.Get(u => u.Id == id, includeProperties: "Dog");
             }
-
-            // Instantiate the ViewModel
-            var dogApplicationDetailVM = new DogApplicationDetailVM
+            if(dogId.HasValue && dogId.Value != 0)
             {
-                DogApplication = dogApplicationDetail,
-                DogList = _unitOfWork.Dog.GetAll()
-            };
+                dogApplicationDetail = new()
+                {
+                    ApplicationUser = appUser,
+                    ApplicationUserId = userId,
+                    City = appUser.City,
+                    State = appUser.State,
+                    PostalCode = appUser.PostalCode,
+                    StreetAddress = appUser.StreetAddress,
+                    PhoneNumber = appUser.PhoneNumber,
+                    Name = appUser.Name,
+                    DogId = dogId.Value,
+                    Dog = _unitOfWork.Dog.Get(u => u.Id == dogId)
 
-            return View(dogApplicationDetailVM);
+                };
+
+
+                currentDog = _unitOfWork.Dog.Get(u => u.Id == dogId);
+                // Instantiate the ViewModel with the given dog
+                var dogApplicationDetailVM = new DogApplicationDetailVM
+                {
+                    DogApplication = dogApplicationDetail,
+                    CurrentDog = currentDog,
+                    DogList = _unitOfWork.Dog.GetAll()
+                };
+                return View(dogApplicationDetailVM);
+
+            }
+            else
+            {
+                dogApplicationDetail = new()
+                {
+                    ApplicationUser = appUser,
+                    ApplicationUserId = userId,
+                    City = appUser.City,
+                    State = appUser.State,
+                    PostalCode = appUser.PostalCode,
+                    StreetAddress = appUser.StreetAddress,
+                    PhoneNumber = appUser.PhoneNumber,
+                    Name = appUser.Name,
+
+                };
+                // Instantiate the ViewModel with no dog
+                var dogApplicationDetailVM = new DogApplicationDetailVM
+                {
+                    DogApplication = dogApplicationDetail,
+                    DogList = _unitOfWork.Dog.GetAll()
+                };
+                return View(dogApplicationDetailVM);
+
+            }
         }
 
 
 
 
-
+///here is where we start today
         [HttpPost]
         public IActionResult Upsert(DogApplicationDetailVM dogApplicationDetailVM)
         {

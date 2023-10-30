@@ -15,35 +15,31 @@
                 <div class="col-12">
                     <div class="border p-3">
                         <div class="form-floating py-2 col-12">
+                            <select asp-for="@(Model.DogApplication.DogId)" class="form-control border-0 shadow">
+                                <option value="" disabled selected>---Pick a Puppy---</option>
+                                @foreach (var dog in Model.DogList)
+                                {
+                                    <option value="@dog.Id">@dog.Name</option>
+                                }
+                            </select>
+                            <label asp-for="@(Model.DogApplication.Name)" class="ms-2">Puppy Name</label>
+                            <span asp-validation-for="@(Model.DogApplication.DogId)" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
                             <input asp-for="@(Model.DogApplication.Name)" class="form-control border-0 shadow" />
-                            <label asp-for="@(Model.DogApplication.Name)" class="ms-2"></label>
+                            <label asp-for="@(Model.DogApplication.Name)" class="ms-2">Your Name</label>
                             <span asp-validation-for="@(Model.DogApplication.Name)" class="text-danger"></span>
                         </div>
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="@(Model.DogApplication.Answer1)" class="form-control border-0 shadow" />
-                            <label asp-for="@(Model.DogApplication.Answer1)" class="ms-2"></label>
-                            <span asp-validation-for="@(Model.DogApplication.Answer1)" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="@(Model.DogApplication.Answer2)" class="form-control border-0 shadow" />
-                            <label asp-for="@(Model.DogApplication.Answer2)" class="ms-2"></label>
-                            <span asp-validation-for="@(Model.DogApplication.Answer2)" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="@(Model.DogApplication.Answer3)" class="form-control border-0 shadow" />
-                            <label asp-for="@(Model.DogApplication.Answer3)" class="ms-2"></label>
-                            <span asp-validation-for="@(Model.DogApplication.Answer3)" class="text-danger"></span>
-                        </div>>
                         <div class="form-floating py-2 col-12">
                             <input asp-for="@(Model.DogApplication.PhoneNumber)" class="form-control border-0 shadow" />
                             <label asp-for="@(Model.DogApplication.PhoneNumber)" class="ms-2"></label>
                             <span asp-validation-for="@(Model.DogApplication.PhoneNumber)" class="text-danger"></span>
-                        </div>>
+                        </div>
                         <div class="form-floating py-2 col-12">
                             <input asp-for="@(Model.DogApplication.StreetAddress)" class="form-control border-0 shadow" />
                             <label asp-for="@(Model.DogApplication.StreetAddress)" class="ms-2"></label>
                             <span asp-validation-for="@(Model.DogApplication.StreetAddress)" class="text-danger"></span>
-                        </div>>
+                        </div>
                         <div class="form-floating py-2 col-12">
                             <input asp-for="@(Model.DogApplication.City)" class="form-control border-0 shadow" />
                             <label asp-for="@(Model.DogApplication.City)" class="ms-2"></label>
@@ -59,19 +55,20 @@
                             <label asp-for="@(Model.DogApplication.PostalCode)" class="ms-2"></label>
                             <span asp-validation-for="@(Model.DogApplication.PostalCode)" class="text-danger"></span>
                         </div>
-
-
-                       
                         <div class="form-floating py-2 col-12">
-                            <select asp-for="@(Model.DogApplication.DogId)" class="form-control border-0 shadow">
-                                <option value="" disabled selected>---Pick a Puppy---</option>
-                                @foreach(var dog in Model.DogList)
-                                {
-                                    <option value="@dog.Id">@dog.Name</option>
-                                }
-                            </select>
-                            <label asp-for="@(Model.DogApplication.DogId)" class="ms-2"></label>
-                            <span asp-validation-for="@(Model.DogApplication.DogId)" class="text-danger"></span>
+                            <input asp-for="@(Model.DogApplication.Answer1)" class="form-control border-0 shadow" />
+                            <label asp-for="@(Model.DogApplication.Answer1)" class="ms-2">Question 1</label>
+                            <span asp-validation-for="@(Model.DogApplication.Answer1)" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="@(Model.DogApplication.Answer2)" class="form-control border-0 shadow" />
+                            <label asp-for="@(Model.DogApplication.Answer2)" class="ms-2">Question 2</label>
+                            <span asp-validation-for="@(Model.DogApplication.Answer2)" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="@(Model.DogApplication.Answer3)" class="form-control border-0 shadow" />
+                            <label asp-for="@(Model.DogApplication.Answer3)" class="ms-2">Question 3</label>
+                            <span asp-validation-for="@(Model.DogApplication.Answer3)" class="text-danger"></span>
                         </div>
                         <div class="row pt-2">
                             <div class="col-6 col-md-3">
@@ -86,7 +83,7 @@
                             </div>
                             <div class="col-6 col-md-3">
                                 <a asp-controller="DogApplication" asp-action="Index" class="btn btn-outline-primary border form-control">
-                                    Back to list
+                                    Back to Puppy Applications
                                 </a>
                             </div>
                         </div>
@@ -96,8 +93,6 @@
         </form>
     </div>
 </div>
-
-
 
 @section Scripts{
 
