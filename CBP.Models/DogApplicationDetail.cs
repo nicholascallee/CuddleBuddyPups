@@ -7,18 +7,22 @@ namespace CBP.Models
 {
     public class DogApplicationDetail
     {
+        [Key]
         public int Id { get; set; }
-        [Required]
         public int DogId { get; set; }
         [ForeignKey("DogId")]
         [ValidateNever]
         public Dog Dog { get; set; }
+        [Required]
 
 
         public string ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
+
+
+
         public DateTime ApplicationDate { get; set; }
 
         public string ApplicationStatus { get; set; }

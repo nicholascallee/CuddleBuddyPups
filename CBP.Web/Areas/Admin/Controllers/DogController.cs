@@ -3,7 +3,6 @@ using CBP.Models;
 using CBP.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CBP.Web.Areas.Admin.Controllers
 {

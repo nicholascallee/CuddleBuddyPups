@@ -1,5 +1,6 @@
 ﻿using CBP.DataAccess.Repository.IRepository;
 using CBP.Models;
+using CBP.Models.ViewModels;
 using CBP.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,9 @@ namespace CBP.Web.Areas.Customer.Controllers
         [BindProperty]
         public IEnumerable <DogApplicationDetail> DogApplicationList { get; set; }
         public DogApplicationDetail CurrentDogApplication { get; set; }
+
+        public DogApplicationDetailVM DogApplicationDetailVM { get; set; }
+
         public DogApplicationController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -35,53 +39,78 @@ namespace CBP.Web.Areas.Customer.Controllers
         }
 
 
-        public IActionResult NewApplication() => RedirectToAction(nameof(ApplicationDetails), -1);
+
+        public IActionResult Upsert(int? id)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            DogApplicationDetail dogApplicationDetail = new()
+            {
+                ApplicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId),
+                ApplicationUserId = userId,
+                Name = _unitOfWork.ApplicationUser.Get(u => u.Id == userId).Name
+            };
+
+            if (id.HasValue && id.Value != 0)
+            {
+                dogApplicationDetail = _unitOfWork.DogApplicationDetail.Get(u => u.Id == id, includeProperties: "Dog");
+            }
+
+            // Instantiate the ViewModel
+            var dogApplicationDetailVM = new DogApplicationDetailVM
+            {
+                DogApplication = dogApplicationDetail,
+                DogList = _unitOfWork.Dog.GetAll()
+            };
+
+            return View(dogApplicationDetailVM);
+        }
+
+
+
+
+
+        [HttpPost]
+        public IActionResult Upsert(DogApplicationDetailVM dogApplicationDetailVM)
+        {
+            if (ModelState.IsValid)
+            {
+                if (dogApplicationDetailVM.DogApplication.Id == 0)
+                {
+                    _unitOfWork.DogApplicationDetail.Add(dogApplicationDetailVM.DogApplication);
+                }
+                else
+                {
+                    _unitOfWork.DogApplicationDetail.Update(dogApplicationDetailVM.DogApplication);
+                }
+                _unitOfWork.Save();
+                TempData["success"] = "Puppy application created/updated successfully";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(dogApplicationDetailVM);
+            }
+        }
 
 
         public IActionResult ApplicationDetails(int applicationDetailId)
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
-            if (applicationDetailId == -1)
-            {
-                CurrentDogApplication = new DogApplicationDetail();
-            }
-            else
-            {
-                CurrentDogApplication = _unitOfWork.DogApplicationDetail.Get(u => u.Id == applicationDetailId,
+            CurrentDogApplication = _unitOfWork.DogApplicationDetail.Get(u => u.Id == applicationDetailId,
                includeProperties: "Dog");
-            }
             return View(CurrentDogApplication);
         }
 
-        [HttpPost]
-        [ActionName("ApplicationDetails")]
-        public IActionResult ApplicationDetailsPOST()
+        
+
+        public IActionResult ApplicationConfirmation(int applicationDetailId)
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-            DogApplicationList = _unitOfWork.DogApplicationDetail.GetAll(u => u.ApplicationUserId == userId, includeProperties: "Dog");
-
-            CurrentDogApplication.ApplicationDate = DateTime.Now;
-            CurrentDogApplication.ApplicationUserId = userId;
-
-
-
-            ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
-
-
-            _unitOfWork.DogApplicationDetail.Add(CurrentDogApplication);
-            _unitOfWork.Save();
-
-
-            return RedirectToAction(nameof(Index));
+            CurrentDogApplication = _unitOfWork.DogApplicationDetail.Get(u => u.Id == applicationDetailId,
+                          includeProperties: "Dog");
+            return View(CurrentDogApplication);
         }
 
-        public IActionResult ApplicationConfirmation(int id)
-        {
-            return View(id);
-        }
         public IActionResult Remove(int dogApplicationId)
         {
             var DogApplicationFromDb = _unitOfWork.DogApplicationDetail.Get(u => u.Id == dogApplicationId, tracked: true);
