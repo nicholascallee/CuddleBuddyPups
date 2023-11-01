@@ -6,7 +6,7 @@
         IDogRepository Dog { get; }
 
 
-        IShoppingCartRepository ShoppingCart { get; }
+        IGalleryImageRepository GalleryImage { get; }
 
         IApplicationUserRepository ApplicationUser { get; }
 

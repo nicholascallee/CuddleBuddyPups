@@ -1,5 +1,6 @@
 ﻿using CBP.DataAccess.Data;
 using CBP.DataAccess.Repository.IRepository;
+using CBP.Models;
 
 namespace CBP.DataAccess.Repository
 {
@@ -7,8 +8,6 @@ namespace CBP.DataAccess.Repository
     {
         private ApplicationDbContext _db;
         public IDogRepository Dog { get; private set; }
-
-        public IShoppingCartRepository ShoppingCart { get; private set; }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
 
@@ -18,12 +17,13 @@ namespace CBP.DataAccess.Repository
         public IDogImageRepository DogImage { get; private set; }
         public IDogApplicationDetailRepository DogApplicationDetail { get; private set; }
 
+        public IGalleryImageRepository GalleryImage { get; private set; }
 
 
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
-            ShoppingCart = new ShoppingCartRepository(_db);
+            GalleryImage = new GalleryImageRepository(_db);
             Dog = new DogRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
             OrderDetail = new OrderDetailRepository(_db);

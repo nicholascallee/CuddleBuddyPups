@@ -4,7 +4,7 @@ using CBP.Models;
 
 namespace CBP.DataAccess.Repository
 {
-    internal class DogRepository : Repository<Dog>, IDogRepository
+    public class DogRepository : Repository<Dog>, IDogRepository
     {
         private ApplicationDbContext _db;
         public DogRepository(ApplicationDbContext db) : base(db)

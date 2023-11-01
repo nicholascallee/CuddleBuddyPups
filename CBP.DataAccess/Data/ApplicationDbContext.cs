@@ -16,7 +16,8 @@ namespace CBP.DataAccess.Data
         public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<OrderHeader> OrderHeaders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+
+        public DbSet<GalleryImage> GalleryImages { get; set; }
         public DbSet<DogImage> DogImages { get; set; }
         public DbSet<DogApplicationDetail> DogApplicationDetails { get; set; }
 
