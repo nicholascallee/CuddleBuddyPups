@@ -12,6 +12,7 @@ namespace CBP.DataAccess.Data
 
         }
 
+        public DbSet<Gallery> Gallerys { get; set; }
         public DbSet<Dog> Dogs { get; set; }
         public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<OrderHeader> OrderHeaders { get; set; }
@@ -42,8 +43,8 @@ namespace CBP.DataAccess.Data
                 {
                     Id = 2,
                     Name = "Sally",
-					Description = "Placeholder dog description here.",
-					ListPrice = 1500,
+                    Description = "Placeholder dog description here.",
+                    ListPrice = 1500,
                     Color = "Black",
                     Gender = "Female",
                     Dob = "10-3-2023"
@@ -52,8 +53,8 @@ namespace CBP.DataAccess.Data
                 {
                     Id = 3,
                     Name = "Cupid",
-					Description = "Placeholder dog description here.",
-					ListPrice = 1500,
+                    Description = "Placeholder dog description here.",
+                    ListPrice = 1500,
                     Color = "Dark Red",
                     Gender = "Male",
                     Dob = "10-3-2023"
@@ -62,8 +63,8 @@ namespace CBP.DataAccess.Data
                 {
                     Id = 4,
                     Name = "Comet",
-					Description = "Placeholder dog description here.",
-					ListPrice = 1500,
+                    Description = "Placeholder dog description here.",
+                    ListPrice = 1500,
                     Color = "Black",
                     Gender = "Male",
                     Dob = "10-2-2023"
@@ -72,8 +73,8 @@ namespace CBP.DataAccess.Data
                 {
                     Id = 5,
                     Name = "Holly",
-					Description = "Placeholder dog description here.",
-					ListPrice = 1500,
+                    Description = "Placeholder dog description here.",
+                    ListPrice = 1500,
                     Color = "Black",
                     Gender = "Female",
                     Dob = "10-2-2023"
@@ -82,8 +83,8 @@ namespace CBP.DataAccess.Data
                 {
                     Id = 6,
                     Name = "Jack",
-					Description = "Placeholder dog description here.",
-					ListPrice = 1500,
+                    Description = "Placeholder dog description here.",
+                    ListPrice = 1500,
                     Color = "Black",
                     Gender = "Male",
                     Dob = "10-2-2023"
@@ -92,14 +93,21 @@ namespace CBP.DataAccess.Data
                 {
                     Id = 7,
                     Name = "Hope",
-					Description = "Placeholder dog description here.",
-					ListPrice = 1500,
+                    Description = "Placeholder dog description here.",
+                    ListPrice = 1500,
                     Color = "Dark Red",
                     Gender = "Female",
                     Dob = "10-2-2023"
                 }
 
                 );
+
+            modelBuilder.Entity<Gallery>().HasData(
+                new Gallery
+                {
+                    Id = 1,
+                    GalleryImages = new List<GalleryImage>()
+                });
         }
     }
 }

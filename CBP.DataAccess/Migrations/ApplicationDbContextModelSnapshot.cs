@@ -153,11 +153,10 @@ namespace CBP.DataAccess.Migrations
                     b.Property<string>("Answer5")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ApplicationDate")
+                    b.Property<DateTime?>("ApplicationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ApplicationStatus")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ApplicationUserId")
@@ -218,6 +217,51 @@ namespace CBP.DataAccess.Migrations
                     b.HasIndex("DogId");
 
                     b.ToTable("DogImages");
+                });
+
+            modelBuilder.Entity("CBP.Models.Gallery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Gallerys");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1
+                        });
+                });
+
+            modelBuilder.Entity("CBP.Models.GalleryImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("GalleryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GalleryId");
+
+                    b.ToTable("GalleryImages");
                 });
 
             modelBuilder.Entity("CBP.Models.OrderDetail", b =>
@@ -323,33 +367,6 @@ namespace CBP.DataAccess.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.ToTable("OrderHeaders");
-                });
-
-            modelBuilder.Entity("CBP.Models.ShoppingCart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DogId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("DogId");
-
-                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -611,6 +628,13 @@ namespace CBP.DataAccess.Migrations
                     b.Navigation("Dog");
                 });
 
+            modelBuilder.Entity("CBP.Models.GalleryImage", b =>
+                {
+                    b.HasOne("CBP.Models.Gallery", null)
+                        .WithMany("GalleryImages")
+                        .HasForeignKey("GalleryId");
+                });
+
             modelBuilder.Entity("CBP.Models.OrderDetail", b =>
                 {
                     b.HasOne("CBP.Models.Dog", "Dog")
@@ -639,25 +663,6 @@ namespace CBP.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
-                });
-
-            modelBuilder.Entity("CBP.Models.ShoppingCart", b =>
-                {
-                    b.HasOne("CBP.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CBP.Models.Dog", "Dog")
-                        .WithMany()
-                        .HasForeignKey("DogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationUser");
-
-                    b.Navigation("Dog");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -714,6 +719,11 @@ namespace CBP.DataAccess.Migrations
             modelBuilder.Entity("CBP.Models.Dog", b =>
                 {
                     b.Navigation("DogImages");
+                });
+
+            modelBuilder.Entity("CBP.Models.Gallery", b =>
+                {
+                    b.Navigation("GalleryImages");
                 });
 #pragma warning restore 612, 618
         }

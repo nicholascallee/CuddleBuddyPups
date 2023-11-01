@@ -18,12 +18,13 @@ namespace CBP.DataAccess.Repository
         public IDogApplicationDetailRepository DogApplicationDetail { get; private set; }
 
         public IGalleryImageRepository GalleryImage { get; private set; }
-
+        public IGalleryRepository Gallery {  get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             GalleryImage = new GalleryImageRepository(_db);
+            Gallery = new GalleryRepository(_db);
             Dog = new DogRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
             OrderDetail = new OrderDetailRepository(_db);

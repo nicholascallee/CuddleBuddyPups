@@ -5,7 +5,7 @@
 
         IDogRepository Dog { get; }
 
-
+        IGalleryRepository Gallery { get; }
         IGalleryImageRepository GalleryImage { get; }
 
         IApplicationUserRepository ApplicationUser { get; }

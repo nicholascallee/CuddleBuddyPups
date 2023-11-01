@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CBP.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class intialMigration : Migration
+    public partial class initialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -74,6 +74,18 @@ namespace CBP.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Dogs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Gallerys",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Gallerys", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -226,8 +238,8 @@ namespace CBP.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DogId = table.Column<int>(type: "int", nullable: false),
                     ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ApplicationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ApplicationStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApplicationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ApplicationStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Answer1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Answer2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -279,30 +291,23 @@ namespace CBP.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShoppingCarts",
+                name: "GalleryImages",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DogId = table.Column<int>(type: "int", nullable: false),
-                    Count = table.Column<int>(type: "int", nullable: false),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GalleryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
+                    table.PrimaryKey("PK_GalleryImages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ShoppingCarts_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ShoppingCarts_Dogs_DogId",
-                        column: x => x.DogId,
-                        principalTable: "Dogs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_GalleryImages_Gallerys_GalleryId",
+                        column: x => x.GalleryId,
+                        principalTable: "Gallerys",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -346,6 +351,11 @@ namespace CBP.DataAccess.Migrations
                     { 6, "Black", "Placeholder dog description here.", "10-2-2023", "Male", 1500.0, "Jack" },
                     { 7, "Dark Red", "Placeholder dog description here.", "10-2-2023", "Female", 1500.0, "Hope" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Gallerys",
+                column: "Id",
+                value: 1);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -402,6 +412,11 @@ namespace CBP.DataAccess.Migrations
                 column: "DogId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_GalleryImages_GalleryId",
+                table: "GalleryImages",
+                column: "GalleryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_DogId",
                 table: "OrderDetails",
                 column: "DogId");
@@ -415,16 +430,6 @@ namespace CBP.DataAccess.Migrations
                 name: "IX_OrderHeaders_ApplicationUserId",
                 table: "OrderHeaders",
                 column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ShoppingCarts_ApplicationUserId",
-                table: "ShoppingCarts",
-                column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ShoppingCarts_DogId",
-                table: "ShoppingCarts",
-                column: "DogId");
         }
 
         /// <inheritdoc />
@@ -452,19 +457,22 @@ namespace CBP.DataAccess.Migrations
                 name: "DogImages");
 
             migrationBuilder.DropTable(
-                name: "OrderDetails");
+                name: "GalleryImages");
 
             migrationBuilder.DropTable(
-                name: "ShoppingCarts");
+                name: "OrderDetails");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "OrderHeaders");
+                name: "Gallerys");
 
             migrationBuilder.DropTable(
                 name: "Dogs");
+
+            migrationBuilder.DropTable(
+                name: "OrderHeaders");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
