@@ -57,114 +57,60 @@ namespace CBP.Web.Areas.Admin.Controllers
                         //create an image
                         GalleryImage galleryImage = new()
                         {
-                            ImageUrl = @"\" + imagePath + fileName
+                            ImageUrl = @"\" + imagePath + fileName,
+                            GalleryId = 1
                         };
 
 
                         //add the image to the list of images in the view model
                         gallery.GalleryImages.Add(galleryImage);
+                        _unitOfWork.GalleryImage.Add(galleryImage);
+                        _unitOfWork.Save();
+
 
                     }
                     _unitOfWork.Gallery.Update(gallery);
                     _unitOfWork.Save();
                 }
                 TempData["success"] = "Gallery updated successfully";
-                return RedirectToAction("Gallery", "Home");
+                return RedirectToAction(nameof(Upsert));
             }
             else
             {
-                return RedirectToAction("Gallery","Home");
+                return RedirectToAction(nameof(Upsert));
             }
         }
 
         #region API CALLS
-
-        [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult DeleteImage(int id)
         {
-            List<Dog> objDogList = _unitOfWork.Dog.GetAll().ToList();
-            return Json(new { data = objDogList });
-        }
-
-        [HttpDelete]
-        public IActionResult Delete(int? id)
-        {
-            var dogToBeDeleted = _unitOfWork.Dog.Get(u => u.Id == id);
-            if (dogToBeDeleted == null)
+            var photoGallery = _unitOfWork.Gallery.Get(u => u.Id == 1, includeProperties: "GalleryImages");
+            var photoToBeDeleted = photoGallery.GalleryImages.FirstOrDefault(u => u.Id == id);
+            if (photoToBeDeleted == null)
             {
-                return Json(new { success = false, message = "Error while deleting" });
+                TempData["success"] = "Failed To Locate and Delete Photo.";
+
+                return RedirectToAction(nameof(Upsert));
             }
-            string dogPath = @"images\Dogs\Dog-" + id + @"\";
-            string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, dogPath);
-
-            if (Directory.Exists(finalPath))
-            {
-                string[] filePaths = Directory.GetFiles(finalPath);
-                foreach (string filePath in filePaths)
-                {
-                    System.IO.File.Delete(filePath);
-                }
-                Directory.Delete(finalPath);
-            }
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+            string photoPath = photoToBeDeleted.ImageUrl;
+            string finalPath = Path.Combine(wwwRootPath, photoPath);
+            
+            System.IO.File.Delete(wwwRootPath + photoPath);
 
 
-            _unitOfWork.Dog.Remove(dogToBeDeleted);
+            photoGallery.GalleryImages.Remove(photoToBeDeleted);
+            _unitOfWork.Gallery.Update(photoGallery);
+            _unitOfWork.Save();
+            _unitOfWork.GalleryImage.Remove(photoToBeDeleted);
             _unitOfWork.Save();
 
-            return Json(new { success = true, message = "Delete Successful" });
+
+            TempData["success"] = "Deleted Photo Successfully.";
+
+            return RedirectToAction(nameof(Upsert));
         }
-
-
-        public IActionResult DeleteImage(int imageId)
-        {
-            var imageToBeDeleted = _unitOfWork.DogImage.Get(u => u.Id == imageId);
-            int dogId = imageToBeDeleted.DogId;
-            if (imageToBeDeleted != null)
-            {
-                var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, imageToBeDeleted.ImageUrl.TrimStart('\\'));
-                if (System.IO.File.Exists(oldImagePath))
-                {
-                    System.IO.File.Delete(oldImagePath);
-                }
-
-                _unitOfWork.DogImage.Remove(imageToBeDeleted);
-                _unitOfWork.Save();
-
-                TempData["success"] = "Deleted Photo Successfully.";
-            }
-            return RedirectToAction(nameof(Upsert), new { id = dogId });
-        }
-
-        //public IActionResult DeleteImage(int imageId)
-        //{
-        //    var imageToBeDeleted = _unitOfWork.GalleryImage.Get(u => u.Id == imageId);
-
-        //    if (imageToBeDeleted == null)
-        //    {
-        //        return Json(new { success = false, message = "Error while deleting" });
-        //    }
-        //    string imagePath = @"images\Gallery\" + imageId + @"\";
-        //    string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, imagePath);
-
-
-        //    var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, imageToBeDeleted.TrimStart('\\'));
-        //    if (System.IO.File.Exists(oldImagePath))
-        //    {
-        //        System.IO.File.Delete(oldImagePath);
-        //    }
-
-        //    _unitOfWork.DogImage.Remove(imageToBeDeleted);
-        //    _unitOfWork.Save();
-
-        //    TempData["success"] = "Deleted Photo Successfully.";
-
-        //    return RedirectToAction(nameof(Upsert), new { id = dogId });
-        //}
 
         #endregion
-
-
-
-
     }
 }

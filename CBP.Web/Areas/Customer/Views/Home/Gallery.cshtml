@@ -1,18 +1,18 @@
-﻿@* @model PuppyImageGallery
+﻿@model Gallery
 
 <div class="row">
-    <div class="col-12 col-lg-3 offset-lg-1 text-center mb-3">
-        @if (Model.puppyImages != null)
+    <div class="col-10 text-center">
+        @if (Model.GalleryImages != null)
         {
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
                 <div class="carousel-indicators">
-                    @foreach (var imageWithIndex in Model.PuppyImages.Select((image, index) => new { Image = image, Index = index }))
+                    @foreach (var imageWithIndex in Model.GalleryImages.Select((image, index) => new { Image = image, Index = index }))
                     {
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@imageWithIndex.Index" class="@(imageWithIndex.Index==0?"active":"")" aria-current="true" aria-label="Slide 1"></button>
                     }
                 </div>
                 <div class="carousel-inner">
-                    @foreach (var imageWithIndex in Model.PuppyImages.Select((image, index) => new { Image = image, Index = index }))
+                    @foreach (var imageWithIndex in Model.GalleryImages.Select((image, index) => new { Image = image, Index = index }))
                     {
                         <div class="@(imageWithIndex.Index==0?"carousel-item active":"carousel-item")">
                             <img class="d-block w-100" src="@imageWithIndex.Image.ImageUrl" alt="First slide">
@@ -30,4 +30,4 @@
             </div>
         }
     </div>
- *@
+</div>

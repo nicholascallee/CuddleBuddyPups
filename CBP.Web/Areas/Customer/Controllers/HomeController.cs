@@ -33,8 +33,8 @@ namespace CBP.Web.Areas.Customer.Controllers
         }
         public IActionResult Gallery()
         {
-
-            return View();
+            var gallery = _unitOfWork.Gallery.Get(u => u.Id == 1, includeProperties: "GalleryImages");
+            return View(gallery);
         }
         public IActionResult ContractAndPolicies()
         {

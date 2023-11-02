@@ -11,5 +11,10 @@ namespace CBP.Models
         [ValidateNever]
         public List<GalleryImage> GalleryImages { get; set; }
 
+        public Gallery()
+        {
+            GalleryImages = new List<GalleryImage>();
+        }
+
     }
 }

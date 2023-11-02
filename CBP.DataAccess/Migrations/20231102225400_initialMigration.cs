@@ -296,9 +296,8 @@ namespace CBP.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GalleryId = table.Column<int>(type: "int", nullable: true)
+                    GalleryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -307,7 +306,8 @@ namespace CBP.DataAccess.Migrations
                         name: "FK_GalleryImages_Gallerys_GalleryId",
                         column: x => x.GalleryId,
                         principalTable: "Gallerys",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

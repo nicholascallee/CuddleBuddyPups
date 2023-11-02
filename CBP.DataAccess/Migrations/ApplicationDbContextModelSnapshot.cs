@@ -246,11 +246,7 @@ namespace CBP.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("GalleryId")
+                    b.Property<int>("GalleryId")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
@@ -630,9 +626,13 @@ namespace CBP.DataAccess.Migrations
 
             modelBuilder.Entity("CBP.Models.GalleryImage", b =>
                 {
-                    b.HasOne("CBP.Models.Gallery", null)
+                    b.HasOne("CBP.Models.Gallery", "gallery")
                         .WithMany("GalleryImages")
-                        .HasForeignKey("GalleryId");
+                        .HasForeignKey("GalleryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("gallery");
                 });
 
             modelBuilder.Entity("CBP.Models.OrderDetail", b =>
