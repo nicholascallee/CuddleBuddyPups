@@ -10,7 +10,15 @@
     </div>
     <div class="card-body p-4">
         <form method="post" class="row" enctype="multipart/form-data">
-            <input asp-for="@(Model.DogApplication.Id)" hidden />
+            <input type="hidden" asp-for="@(Model.DogApplication.Id)" />
+            <input type="hidden" asp-for="@(Model.DogApplication.ApplicationDate)" />
+            <input type="hidden" asp-for="@(Model.DogApplication.ApplicationStatus)" />
+            <input type="hidden" asp-for="@(Model.DogApplication.ApplicationUser)" />
+            <input type="hidden" asp-for="@(Model.DogApplication.ApplicationUserId)" />
+            <input type="hidden" asp-for="@(Model.DogApplication.Dog)" />
+            <input type="hidden" asp-for="@(Model.DogList)" />
+            <input type="hidden" asp-for="@(Model.CurrentDog)" />
+
             <div class="row">
                 <div class="col-12">
                     <div class="border p-3">

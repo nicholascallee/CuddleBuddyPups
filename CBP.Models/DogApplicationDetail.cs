@@ -13,15 +13,13 @@ namespace CBP.Models
         [ForeignKey("DogId")]
         [ValidateNever]
         public Dog Dog { get; set; }
+
         [Required]
-
-
         public string ApplicationUserId { get; set; }
+
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
-
-
 
         public DateTime? ApplicationDate { get; set; }
 

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CBP.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231102225400_initialMigration")]
+    [Migration("20231103150049_initialMigration")]
     partial class initialMigration
     {
         /// <inheritdoc />
@@ -629,13 +629,13 @@ namespace CBP.DataAccess.Migrations
 
             modelBuilder.Entity("CBP.Models.GalleryImage", b =>
                 {
-                    b.HasOne("CBP.Models.Gallery", "gallery")
+                    b.HasOne("CBP.Models.Gallery", "Gallery")
                         .WithMany("GalleryImages")
                         .HasForeignKey("GalleryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("gallery");
+                    b.Navigation("Gallery");
                 });
 
             modelBuilder.Entity("CBP.Models.OrderDetail", b =>

@@ -102,7 +102,6 @@ namespace CBP.Web.Areas.Customer.Controllers
                     DogList = _unitOfWork.Dog.GetAll()
                 };
                 return View(dogApplicationDetailVM);
-
             }
         }
 
