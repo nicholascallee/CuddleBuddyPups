@@ -15,11 +15,11 @@ namespace CBP.Web.Areas.Customer.Controllers
 
         private readonly IUnitOfWork _unitOfWork;
         [BindProperty]
-        public IEnumerable <DogApplicationDetail> DogApplicationList { get; set; }
-        public DogApplicationDetail CurrentDogApplication { get; set; }
+        public IEnumerable <ApplicationDetail> DogApplicationList { get; set; }
+        public ApplicationDetail CurrentDogApplication { get; set; }
         public Dog currentDog { get; set; }
 
-        public DogApplicationDetailVM DogApplicationDetailVM { get; set; }
+        public ApplicationVM DogApplicationDetailVM { get; set; }
 
         public DogApplicationController(IUnitOfWork unitOfWork)
         {
@@ -47,7 +47,7 @@ namespace CBP.Web.Areas.Customer.Controllers
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
             var appUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
 
-            DogApplicationDetail dogApplicationDetail;
+            ApplicationDetail dogApplicationDetail;
             if (id.HasValue && id.Value != 0)
             {
                 dogApplicationDetail = _unitOfWork.DogApplicationDetail.Get(u => u.Id == id, includeProperties: "Dog");
@@ -72,7 +72,7 @@ namespace CBP.Web.Areas.Customer.Controllers
 
                 currentDog = _unitOfWork.Dog.Get(u => u.Id == dogId);
                 // Instantiate the ViewModel with the given dog
-                var dogApplicationDetailVM = new DogApplicationDetailVM
+                var dogApplicationDetailVM = new ApplicationVM
                 {
                     DogApplication = dogApplicationDetail,
                     CurrentDog = currentDog,
@@ -96,7 +96,7 @@ namespace CBP.Web.Areas.Customer.Controllers
 
                 };
                 // Instantiate the ViewModel with no dog
-                var dogApplicationDetailVM = new DogApplicationDetailVM
+                var dogApplicationDetailVM = new ApplicationVM
                 {
                     DogApplication = dogApplicationDetail,
                     DogList = _unitOfWork.Dog.GetAll()
@@ -110,7 +110,7 @@ namespace CBP.Web.Areas.Customer.Controllers
 
 ///here is where we start today
         [HttpPost]
-        public IActionResult Upsert(DogApplicationDetailVM dogApplicationDetailVM)
+        public IActionResult Upsert(ApplicationVM dogApplicationDetailVM)
         {
             if (ModelState.IsValid)
             {

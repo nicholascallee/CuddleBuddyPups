@@ -1,6 +1,5 @@
 ﻿using CBP.DataAccess.Data;
 using CBP.DataAccess.Repository.IRepository;
-using CBP.Models;
 
 namespace CBP.DataAccess.Repository
 {
@@ -15,7 +14,9 @@ namespace CBP.DataAccess.Repository
         public IOrderHeaderRepository OrderHeader { get; private set; }
 
         public IDogImageRepository DogImage { get; private set; }
-        public IDogApplicationDetailRepository DogApplicationDetail { get; private set; }
+        public IApplicationDetailRepository ApplicationDetail { get; private set; }
+
+        public IApplicationHeaderRepository ApplicationHeader { get; private set; }
 
         public IGalleryImageRepository GalleryImage { get; private set; }
         public IGalleryRepository Gallery {  get; private set; }
@@ -30,7 +31,8 @@ namespace CBP.DataAccess.Repository
             OrderDetail = new OrderDetailRepository(_db);
             OrderHeader = new OrderHeaderRepository(_db);
             DogImage = new DogImageRepository(_db);
-            DogApplicationDetail = new DogApplicationDetailRepository(_db);
+            ApplicationDetail = new ApplicationDetailRepository(_db);
+            ApplicationHeader = new ApplicationHeaderRepository(_db);
         }
 
         public void Save()

@@ -20,7 +20,9 @@ namespace CBP.DataAccess.Data
 
         public DbSet<GalleryImage> GalleryImages { get; set; }
         public DbSet<DogImage> DogImages { get; set; }
-        public DbSet<DogApplicationDetail> DogApplicationDetails { get; set; }
+        public DbSet<ApplicationDetail> ApplicationDetails { get; set; }
+
+        public DbSet<ApplicationHeader> ApplicationHeaders { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
