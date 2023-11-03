@@ -154,15 +154,22 @@
                                     </button>
                                 }
                                 @if (Model.ApplicationHeader.ApplicationStatus == SD.StatusApproved) {
-                                    <button type="submit" asp-action="SetApplicationStatus" asp-route-ApplicationStatus="@SD.StatusApproved" class="btn btn-primary form-control my-1">
+                                    <button type="submit" asp-action="SetApplicationStatus" asp-route-ApplicationStatus="@SD.StatusInProgress" class="btn btn-primary form-control my-1">
                                         Continue Application Process
                                     </button>
                                 }
-                                @if (Model.ApplicationHeader.ApplicationStatus != SD.StatusCancelled) {
-                                    <button type="submit" asp-action="SetApplicationStatus" asp-route-ApplicationStatus="@SD.StatusCancelled" class="btn btn-primary form-control my-1">
-                                        Cancel Application
+                                @if (Model.ApplicationHeader.ApplicationStatus == SD.StatusInProgress) {
+                                    <button type="submit" asp-action="SetApplicationStatus" asp-route-ApplicationStatus="@SD.StatusFinalized" class="btn btn-primary form-control my-1">
+                                        Finalize Application Process
                                     </button>
                                 }
+                               
+                            }
+                            @if (Model.ApplicationHeader.ApplicationStatus != SD.StatusCancelled)
+                            {
+                                <button type="submit" asp-action="SetApplicationStatus" asp-route-ApplicationStatus="@SD.StatusCancelled" class="btn btn-primary form-control my-1">
+                                    Cancel Application
+                                </button>
                             }
                         </div>
                     </div>

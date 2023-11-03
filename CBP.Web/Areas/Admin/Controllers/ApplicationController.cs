@@ -76,13 +76,11 @@ namespace CBP.Web.Areas.Admin.Controllers
             return RedirectToAction(nameof(Details), new { ApplicationId = ApplicationHeaderFromDb.Id });
          }
 
-
-
         [HttpPost]
         [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
-        public IActionResult ReviewApplication()
+        public IActionResult SetPaymentStatus(string paymentStatus)
         {
-            _unitOfWork.ApplicationHeader.UpdateStatus(ApplicationVM.ApplicationHeader.Id, SD.StatusInReview);
+            _unitOfWork.ApplicationHeader.UpdateStatus(ApplicationVM.ApplicationHeader.Id, ApplicationVM.ApplicationHeader.ApplicationStatus,paymentStatus);
             _unitOfWork.Save();
             TempData["Success"] = "Application status Updated Successfully.";
             return RedirectToAction(nameof(Details), new { ApplicationId = ApplicationVM.ApplicationHeader.Id });
@@ -90,45 +88,15 @@ namespace CBP.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
-        public IActionResult ApproveApplication()
-        {
-            _unitOfWork.ApplicationHeader.UpdateStatus(ApplicationVM.ApplicationHeader.Id, SD.StatusApproved);
-            _unitOfWork.Save();
-            TempData["Success"] = "Application status Updated Successfully.";
-            return RedirectToAction(nameof(Details), new { ApplicationId = ApplicationVM.ApplicationHeader.Id });
-        }
-
-        [HttpPost]
-        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
-        public IActionResult FinalizeApplication()
-        {
-            _unitOfWork.ApplicationHeader.UpdateStatus(ApplicationVM.ApplicationHeader.Id, SD.StatusFinalized);
-            _unitOfWork.Save();
-            TempData["Success"] = "Application status Updated Successfully.";
-            return RedirectToAction(nameof(Details), new { ApplicationId = ApplicationVM.ApplicationHeader.Id });
-        }
-
-        [HttpPost]
-        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
-        public IActionResult ConfirmPayment()
-        {
-            _unitOfWork.ApplicationHeader.UpdateStatus(ApplicationVM.ApplicationHeader.Id, ApplicationVM.ApplicationHeader.ApplicationStatus,SD.PaymentStatusPaid);
-            _unitOfWork.Save();
-            TempData["Success"] = "Application status Updated Successfully.";
-            return RedirectToAction(nameof(Details), new { ApplicationId = ApplicationVM.ApplicationHeader.Id });
-        }
-
-        [HttpPost]
-        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
-        public IActionResult CancelApplication()
+        public IActionResult SetApplicationStatus(string applicationStatus)
         {
             var ApplicationHeader = _unitOfWork.ApplicationHeader.Get(u => u.Id == ApplicationVM.ApplicationHeader.Id);
             if (ApplicationHeader.PaymentStatus == SD.StatusApproved)
             {
-               _unitOfWork.ApplicationHeader.UpdateStatus(ApplicationHeader.Id, SD.StatusCancelled, SD.StatusCancelled);
+               _unitOfWork.ApplicationHeader.UpdateStatus(ApplicationHeader.Id, applicationStatus);
                _unitOfWork.Save();
             }
-            TempData["Success"] = "Application Cancelled Successfully.";
+            TempData["Success"] = "Application Updated Successfully.";
             return RedirectToAction(nameof(Details), new { ApplicationId = ApplicationVM.ApplicationHeader.Id });
         }
 
