@@ -110,6 +110,41 @@ namespace CBP.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ApplicationHeaders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ApplicationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ApplicationStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StreetAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Answer1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Answer2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Answer3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Answer4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Answer5 = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplicationHeaders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ApplicationHeaders_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
@@ -231,46 +266,6 @@ namespace CBP.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DogApplicationDetails",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DogId = table.Column<int>(type: "int", nullable: false),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ApplicationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ApplicationStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Answer1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Answer2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Answer3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Answer4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Answer5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StreetAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    State = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DogApplicationDetails", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DogApplicationDetails_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DogApplicationDetails_Dogs_DogId",
-                        column: x => x.DogId,
-                        principalTable: "Dogs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "DogImages",
                 columns: table => new
                 {
@@ -306,6 +301,32 @@ namespace CBP.DataAccess.Migrations
                         name: "FK_GalleryImages_Gallerys_GalleryId",
                         column: x => x.GalleryId,
                         principalTable: "Gallerys",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ApplicationDetails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ApplicationHeaderId = table.Column<int>(type: "int", nullable: false),
+                    DogId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplicationDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ApplicationDetails_ApplicationHeaders_ApplicationHeaderId",
+                        column: x => x.ApplicationHeaderId,
+                        principalTable: "ApplicationHeaders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ApplicationDetails_Dogs_DogId",
+                        column: x => x.DogId,
+                        principalTable: "Dogs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -358,6 +379,21 @@ namespace CBP.DataAccess.Migrations
                 value: 1);
 
             migrationBuilder.CreateIndex(
+                name: "IX_ApplicationDetails_ApplicationHeaderId",
+                table: "ApplicationDetails",
+                column: "ApplicationHeaderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ApplicationDetails_DogId",
+                table: "ApplicationDetails",
+                column: "DogId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ApplicationHeaders_ApplicationUserId",
+                table: "ApplicationHeaders",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -397,16 +433,6 @@ namespace CBP.DataAccess.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DogApplicationDetails_ApplicationUserId",
-                table: "DogApplicationDetails",
-                column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DogApplicationDetails_DogId",
-                table: "DogApplicationDetails",
-                column: "DogId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_DogImages_DogId",
                 table: "DogImages",
                 column: "DogId");
@@ -436,6 +462,9 @@ namespace CBP.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ApplicationDetails");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -451,9 +480,6 @@ namespace CBP.DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "DogApplicationDetails");
-
-            migrationBuilder.DropTable(
                 name: "DogImages");
 
             migrationBuilder.DropTable(
@@ -461,6 +487,9 @@ namespace CBP.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderDetails");
+
+            migrationBuilder.DropTable(
+                name: "ApplicationHeaders");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

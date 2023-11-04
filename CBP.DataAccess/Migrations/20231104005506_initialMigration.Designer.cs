@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CBP.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231103150049_initialMigration")]
+    [Migration("20231104005506_initialMigration")]
     partial class initialMigration
     {
         /// <inheritdoc />
@@ -24,6 +24,102 @@ namespace CBP.DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CBP.Models.ApplicationDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ApplicationHeaderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DogId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationHeaderId");
+
+                    b.HasIndex("DogId");
+
+                    b.ToTable("ApplicationDetails");
+                });
+
+            modelBuilder.Entity("CBP.Models.ApplicationHeader", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Answer1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Answer2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Answer3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Answer4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Answer5")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ApplicationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ApplicationStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrderStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StreetAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("ApplicationHeaders");
+                });
 
             modelBuilder.Entity("CBP.Models.Dog", b =>
                 {
@@ -131,73 +227,6 @@ namespace CBP.DataAccess.Migrations
                             ListPrice = 1500.0,
                             Name = "Hope"
                         });
-                });
-
-            modelBuilder.Entity("CBP.Models.DogApplicationDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Answer1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Answer2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Answer3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Answer4")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Answer5")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ApplicationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ApplicationStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DogId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PaymentStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StreetAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("DogId");
-
-                    b.ToTable("DogApplicationDetails");
                 });
 
             modelBuilder.Entity("CBP.Models.DogImage", b =>
@@ -597,11 +626,11 @@ namespace CBP.DataAccess.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
-            modelBuilder.Entity("CBP.Models.DogApplicationDetail", b =>
+            modelBuilder.Entity("CBP.Models.ApplicationDetail", b =>
                 {
-                    b.HasOne("CBP.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("CBP.Models.ApplicationHeader", "ApplicationHeader")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId")
+                        .HasForeignKey("ApplicationHeaderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -611,9 +640,20 @@ namespace CBP.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApplicationUser");
+                    b.Navigation("ApplicationHeader");
 
                     b.Navigation("Dog");
+                });
+
+            modelBuilder.Entity("CBP.Models.ApplicationHeader", b =>
+                {
+                    b.HasOne("CBP.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("CBP.Models.DogImage", b =>

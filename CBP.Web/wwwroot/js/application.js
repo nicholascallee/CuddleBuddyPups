@@ -30,7 +30,7 @@ $(document).ready(function () {
 
 function loadDataTable(status) {
     dataTable = $('#tblData').DataTable({
-        "ajax": { url: '/admin/order/getall?status=' + status },
+        "ajax": { url: '/admin/application/getall?status=' + status },
         "columns": [
             { data: 'id', "width": "5%" },
             { data: 'dog', "width": "15%" },
