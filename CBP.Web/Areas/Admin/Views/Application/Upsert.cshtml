@@ -1,13 +1,13 @@
-﻿@model ApplicationVM
+﻿@model ApplicationHeader
 <form method="post">
-    <input asp-for="ApplicationHeader.Id" hidden />
+    <input asp-for="Id" hidden />
     <br />
     <div class="container">
         <div class="card">
             <div class="card-header bg-dark text-light ml-0">
                 <div class="container row">
                     <div class="col-12 d-none d-md-block col-md-6 pb-1">
-                        <i class="fas fa-shopping-cart"></i> &nbsp; Application Summary
+                        Application Summary
                     </div>
                     <div class="col-12 col-md-4 offset-md-2 text-right">
                         <a asp-action="Index" class="btn btn-outline-info form-control btn-sm">Back to Applications</a>
@@ -27,11 +27,11 @@
                                 <div class="col-3">Name</div>
                                 <div class="col-9">
                                     @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee)) {
-                                        <input asp-for="ApplicationHeader.Name" type="text" class="form-control" />
-                                        <span asp-validation-for="ApplicationHeader.Name" class="text-danger"></span>
+                                        <input asp-for="Name" type="text" class="form-control" />
+                                        <span asp-validation-for="Name" class="text-danger"></span>
                                     }
                                     else {
-                                        <input asp-for="ApplicationHeader.Name" readonly type="text" class="form-control" />
+                                        <input asp-for="Name" readonly type="text" class="form-control" />
                                     }
 
                                 </div>
@@ -40,11 +40,11 @@
                                 <div class="col-3">Phone</div>
                                 <div class="col-9">
                                     @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee)) {
-                                        <input asp-for="ApplicationHeader.PhoneNumber" type="text" class="form-control" />
-                                        <span asp-validation-for="ApplicationHeader.PhoneNumber" class="text-danger"></span>
+                                        <input asp-for="PhoneNumber" type="text" class="form-control" />
+                                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                                     }
                                     else {
-                                        <input asp-for="ApplicationHeader.PhoneNumber" readonly type="text" class="form-control" />
+                                        <input asp-for="PhoneNumber" readonly type="text" class="form-control" />
                                     }
                                 </div>
                             </div>
@@ -52,11 +52,11 @@
                                 <div class="col-3">Address</div>
                                 <div class="col-9">
                                     @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee)) {
-                                        <input asp-for="ApplicationHeader.StreetAddress" type="text" class="form-control" />
-                                        <span asp-validation-for="ApplicationHeader.StreetAddress" class="text-danger"></span>
+                                        <input asp-for="StreetAddress" type="text" class="form-control" />
+                                        <span asp-validation-for="StreetAddress" class="text-danger"></span>
                                     }
                                     else {
-                                        <input asp-for="ApplicationHeader.StreetAddress" readonly type="text" class="form-control" />
+                                        <input asp-for="StreetAddress" readonly type="text" class="form-control" />
                                     }
                                 </div>
                             </div>
@@ -64,11 +64,11 @@
                                 <div class="col-3">City</div>
                                 <div class="col-9">
                                     @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee)) {
-                                        <input asp-for="ApplicationHeader.City" type="text" class="form-control" />
-                                        <span asp-validation-for="ApplicationHeader.City" class="text-danger"></span>
+                                        <input asp-for="City" type="text" class="form-control" />
+                                        <span asp-validation-for="City" class="text-danger"></span>
                                     }
                                     else {
-                                        <input asp-for="ApplicationHeader.City" readonly type="text" class="form-control" />
+                                        <input asp-for="City" readonly type="text" class="form-control" />
                                     }
                                 </div>
                             </div>
@@ -76,11 +76,11 @@
                                 <div class="col-3">State</div>
                                 <div class="col-9">
                                     @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee)) {
-                                        <input asp-for="ApplicationHeader.State" type="text" class="form-control" />
-                                        <span asp-validation-for="ApplicationHeader.State" class="text-danger"></span>
+                                        <input asp-for="State" type="text" class="form-control" />
+                                        <span asp-validation-for="State" class="text-danger"></span>
                                     }
                                     else {
-                                        <input asp-for="ApplicationHeader.State" readonly type="text" class="form-control" />
+                                        <input asp-for="State" readonly type="text" class="form-control" />
                                     }
                                 </div>
                             </div>
@@ -88,30 +88,30 @@
                                 <div class="col-3">Zip Code</div>
                                 <div class="col-9">
                                     @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee)) {
-                                        <input asp-for="ApplicationHeader.PostalCode" type="text" class="form-control" />
-                                        <span asp-validation-for="ApplicationHeader.PostalCode" class="text-danger"></span>
+                                        <input asp-for="PostalCode" type="text" class="form-control" />
+                                        <span asp-validation-for="PostalCode" class="text-danger"></span>
                                     }
                                     else {
-                                        <input asp-for="ApplicationHeader.PostalCode" readonly type="text" class="form-control" />
+                                        <input asp-for="PostalCode" readonly type="text" class="form-control" />
                                     }
                                 </div>
                             </div>
                             <div class="row my-1">
                                 <div class="col-3">Email</div>
                                 <div class="col-9">
-                                    <input asp-for="ApplicationHeader.ApplicationUser.Email" readonly type="text" class="form-control" />
+                                    <input asp-for="ApplicationUser.Email" readonly type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="row my-1">
                                 <div class="col-3">Application Date</div>
                                 <div class="col-9">
-                                    <input value="@Model.ApplicationHeader.ApplicationDate.ToShortDateString()" readonly type="text" class="form-control" />
+                                    <input value="@Model.ApplicationDate.ToShortDateString()" readonly type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="row my-1">
                                 <div class="col-3">Payment Status</div>
                                 <div class="col-9">
-                                    <input asp-for="ApplicationHeader.PaymentStatus" readonly type="text" class="form-control" />
+                                    <input asp-for="PaymentStatus" readonly type="text" class="form-control" />
                                 </div>
                             </div>
                             @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee)) {
@@ -122,15 +122,15 @@
                             <h4 class="d-flex justify-content-between align-items-center mb-3">
                                 <span class="text-primary">Application Summary</span>
                             </h4>
-                            <label class="btn btn-outline-primary form-control my-2">Application Status - @Model.ApplicationHeader.ApplicationStatus</label>
+                            <label class="btn btn-outline-primary form-control my-2">Application Status - @Model.ApplicationStatus</label>
 
                             <ul class="list-group mb-3">
 
                                     <li class="list-group-item d-flex justify-content-between p-2">
                                         <div class="row container">
                                             <div class="col-8">
-                                                <h6 class="my-0 text-primary">@Model.ApplicationDetail.Dog.Name</h6>
-                                            <small class="text-muted">Price : @Model.ApplicationDetail.Dog.ListPrice.ToString("c")</small><br />
+                                                <h6 class="my-0 text-primary">@Model.Dog.Name</h6>
+                                            <small class="text-muted">Price : @Model.Dog.ListPrice.ToString("c")</small><br />
                                             </div>
                                         </div>
                                     </li>
@@ -139,33 +139,33 @@
 
                             
                             @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee)) {
-                                @if (Model.ApplicationHeader.PaymentStatus == SD.PaymentStatusPending)
+                                @if (Model.PaymentStatus == SD.PaymentStatusPending)
                                 {
                                     <button asp-action="SetPaymentStatus" asp-route-PaymentStatus="@SD.PaymentStatusPaid" class="btn btn-success form-control my-1">Mark as Paid</button>
                                 }
-                                @if (Model.ApplicationHeader.PaymentStatus == SD.PaymentStatusPaid)
+                                @if (Model.PaymentStatus == SD.PaymentStatusPaid)
                                 {
                                     <button asp-action="SetPaymentStatus" asp-route-PaymentStatus="@SD.PaymentStatusPending" class="btn btn-success form-control my-1">Unmark as Paid</button>
                                 }
-                                @if (Model.ApplicationHeader.ApplicationStatus == SD.StatusInReview)
+                                @if (Model.ApplicationStatus == SD.StatusInReview)
                                 {
                                     <button type="submit" asp-action="SetApplicationStatus" asp-route-ApplicationStatus="@SD.StatusApproved" class="btn btn-primary form-control my-1">
                                         Approve Application
                                     </button>
                                 }
-                                @if (Model.ApplicationHeader.ApplicationStatus == SD.StatusApproved) {
+                                @if (Model.ApplicationStatus == SD.StatusApproved) {
                                     <button type="submit" asp-action="SetApplicationStatus" asp-route-ApplicationStatus="@SD.StatusInProgress" class="btn btn-primary form-control my-1">
                                         Continue Application Process
                                     </button>
                                 }
-                                @if (Model.ApplicationHeader.ApplicationStatus == SD.StatusInProgress) {
+                                @if (Model.ApplicationStatus == SD.StatusInProgress) {
                                     <button type="submit" asp-action="SetApplicationStatus" asp-route-ApplicationStatus="@SD.StatusFinalized" class="btn btn-primary form-control my-1">
                                         Finalize Application Process
                                     </button>
                                 }
                                
                             }
-                            @if (Model.ApplicationHeader.ApplicationStatus != SD.StatusCancelled)
+                            @if (Model.ApplicationStatus != SD.StatusCancelled)
                             {
                                 <button type="submit" asp-action="SetApplicationStatus" asp-route-ApplicationStatus="@SD.StatusCancelled" class="btn btn-primary form-control my-1">
                                     Cancel Application

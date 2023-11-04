@@ -33,12 +33,12 @@ function loadDataTable(status) {
         "ajax": { url: '/admin/application/getall?status=' + status },
         "columns": [
             { data: 'id', "width": "5%" },
-            { data: 'dog', "width": "15%" },
-            { data: 'name', "width": "10%" },
+            { data: 'dog', "width": "10%" },
+            { data: 'name', "width": "15%" },
             { data: 'phoneNumber', "width": "20%" },
-            { data: 'applicationUser.email', "width": "20%" },
+            { data: 'applicationUser.email', "width": "15%" },
             { data: 'applicationStatus', "width": "10%" },
-            { data: 'paymentStatus', "width": "10%" },
+            { data: 'paymentStatus', "width": "15%" },
             {
                 data: 'id',
                 "render": function (data) {

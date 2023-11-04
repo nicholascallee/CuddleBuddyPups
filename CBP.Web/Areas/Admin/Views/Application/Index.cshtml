@@ -1,24 +1,28 @@
 ﻿@{
     var status = Context.Request.Query["status"];
-    var pending = "text-primary";
-    var inprocess = "text-primary";
-    var completed = "text-primary";
-    var approved = "text-primary";
+    var StatusInReview = "text-primary";
+    var StatusApproved = "text-primary";
+    var StatusInProgress = "text-primary";
+    var StatusFinalized = "text-primary";
+    var StatusCancelled = "text-primary";
     var all = "text-primary";
 
     switch (status)
     {
-        case "in review":
-            pending = "active text-white bg-primary";
+        case "InReview":
+            StatusInReview = "active text-white bg-primary";
             break;
-        case "approved":
-            inprocess = "active text-white bg-primary";
+        case "Approved":
+            StatusApproved = "active text-white bg-primary";
             break;
-        case "completed":
-            completed = "active text-white bg-primary";
+        case "InProgress":
+            StatusInProgress = "active text-white bg-primary";
             break;
-        case "cancelled":
-            approved = "active text-white bg-primary";
+        case "Finalized":
+            StatusFinalized = "active text-white bg-primary";
+            break;
+        case "Cancelled":
+            StatusCancelled = "active text-white bg-primary";
             break;
         default:
             all = "active text-white bg-primary";
@@ -26,9 +30,6 @@
     }
 
 }
-
-
-
 
 
 <div class="card shadow border-0 my-4">
@@ -39,24 +40,26 @@
             </div>
         </div>
     </div>
-    <div class="card-body p-4">
-       
+    <div class="card-body p-4">       
         <div class="d-flex justify-content-between pb-5 pt-2">
             <span></span>
             <ul class="list-group list-group-horizontal-sm">
-                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="inprocess">
-                    <li class="list-group-item @inprocess">In Review</li>
+                <a style="text-decoration:none;" asp-controller="Application" asp-action="Index" asp-route-status="@SD.StatusInReview">
+                <li class="list-group-item @StatusInReview">In Review</li>
                 </a>
-                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="pending">
-                <li class="list-group-item @pending">Approved</li>
+                <a style="text-decoration:none;" asp-controller="Application" asp-action="Index" asp-route-status="@SD.StatusApproved">
+                <li class="list-group-item @StatusApproved">Approved</li>
                 </a>
-                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="completed">
-                <li class="list-group-item @completed">Completed</li>
+                <a style="text-decoration:none;" asp-controller="Application" asp-action="Index" asp-route-status="@SD.StatusInProgress">
+                <li class="list-group-item @StatusInProgress">In Progress</li>
                 </a>
-                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="approved">
-                <li class="list-group-item @approved">Cancelled</li>
+                <a style="text-decoration:none;" asp-controller="Application" asp-action="Index" asp-route-status="@SD.StatusFinalized">
+                <li class="list-group-item @StatusFinalized">Finalized</li>
                 </a>
-                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="all">
+                <a style="text-decoration:none;" asp-controller="Application" asp-action="Index" asp-route-status="@SD.StatusCancelled">
+                <li class="list-group-item @StatusCancelled">Cancelled</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Application" asp-action="Index" asp-route-status="all">
                 <li class="list-group-item @all">All</li>
                 </a>
             </ul>

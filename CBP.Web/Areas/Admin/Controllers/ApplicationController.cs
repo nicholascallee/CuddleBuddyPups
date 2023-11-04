@@ -3,6 +3,7 @@ using CBP.Models;
 using CBP.Models.ViewModels;
 using CBP.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -27,6 +28,102 @@ namespace CBP.Web.Areas.Admin.Controllers
         {
             return View();
         }
+
+        public IActionResult Upsert(int? id)
+        {
+
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var appUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
+
+            ApplicationDetail applicationDetail;
+            ApplicationHeader applicationHeader;
+
+
+            if (id.HasValue && id.Value != 0)
+            {
+                applicationDetail = _unitOfWork.ApplicationDetail.Get(u => u.Id == id, includeProperties: "Dog");
+                applicationHeader = _unitOfWork.ApplicationHeader.Get(u => u.Id == id, includeProperties: "ApplicationUser");
+                return View(applicationHeader);
+            }
+            else
+            {
+                applicationHeader = new()
+                {
+                    ApplicationUser = appUser,
+                    ApplicationUserId = userId,
+                    City = appUser.City,
+                    State = appUser.State,
+                    PostalCode = appUser.PostalCode,
+                    StreetAddress = appUser.StreetAddress,
+                    PhoneNumber = appUser.PhoneNumber,
+                    Name = appUser.Name,
+
+                };
+                applicationDetail = new()
+                {
+                    
+                    DogId = id.Value,
+                    Dog = _unitOfWork.Dog.Get(u => u.Id == id),
+                    ApplicationHeaderId = applicationHeader.Id,
+
+                };
+                return View(applicationHeader);
+
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Upsert(ApplicationHeader applicationHeader)
+        {
+            if (ModelState.IsValid)
+            {
+
+                applicationHeader.ApplicationDate = DateTime.Now;
+                applicationHeader.OrderStatus = SD.PaymentStatusPending;
+
+
+
+
+                if (applicationHeader.Id == 0)
+                {
+                    _unitOfWork.ApplicationHeader.Add(applicationHeader);
+                }
+                else
+                {
+                    _unitOfWork.ApplicationHeader.Update(applicationHeader);
+                }
+                _unitOfWork.Save();
+
+
+                TempData["success"] = "Application created/updated successfully";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(applicationHeader);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public IActionResult Details(int applicationId)
         {
